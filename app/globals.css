@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --cream-bg: #FFFEF7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,9 +15,200 @@
   }
 }
 
+@font-face {
+  font-family: 'TG Girthy Ultra';
+  src: url('/fonts/TG-GirthyUltra.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Reddit Mono';
+  src: url('/fonts/RedditMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Main Layout */
+.main-container {
+  @apply min-h-screen flex flex-col;
+  background-color: var(--cream-bg);
+}
+
+/* Navigation */
+.nav {
+  @apply w-full py-4 md:py-6 px-4;
+  position: relative;
+}
+
+.nav-container {
+  @apply max-w-6xl mx-auto flex justify-center items-center gap-8 md:gap-16;
+}
+
+.nav-menu-items {
+  @apply flex justify-center items-center gap-8 md:gap-16;
+}
+
+.menu-link {
+  @apply text-black text-sm font-light cursor-pointer relative block uppercase;
+  font-family: 'Reddit Mono', monospace;
+}
+
+.menu-underline {
+  @apply absolute bottom-0 left-0 w-0 h-px bg-black;
+}
+
+/* Content Area */
+.content-wrapper {
+  @apply flex-1 flex flex-col items-center justify-center px-4 py-4 md:py-8;
+  margin-top: -2rem;
+}
+
+@media (min-width: 768px) {
+  .content-wrapper {
+    margin-top: -4rem;
+  }
+}
+
+.content-container {
+  @apply max-w-4xl w-full text-center space-y-6 md:space-y-8;
+}
+
+.content-container-simple {
+  @apply max-w-4xl w-full text-center;
+}
+
+/* Title Styles */
+.main-title {
+  @apply text-4xl sm:text-5xl md:text-7xl font-bold text-black mb-2 flex items-end justify-center;
+  font-family: 'TG Girthy Ultra', sans-serif;
+  letter-spacing: 0.03em;
+  gap: 0;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .main-title {
+    letter-spacing: 0.05em;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-title {
+    gap: 0;
+    letter-spacing: 0.08em;
+  }
+}
+
+.main-title span {
+  margin: 0 -.25rem;
+}
+
+@media (min-width: 640px) {
+  .main-title span {
+    margin: 0 -.4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-title span {
+    margin: 0 -.5rem;
+  }
+}
+
+.page-title {
+  @apply text-4xl md:text-6xl font-bold text-black mb-8;
+}
+
+.subtitle {
+  @apply text-xl md:text-2xl text-black font-light;
+}
+
+.body-text {
+  @apply text-lg text-black;
+}
+
+/* Badge */
+.coming-soon-badge {
+  @apply inline-block px-6 py-3 bg-indigo-600 text-white rounded-full text-sm md:text-base font-semibold shadow-lg;
+}
+
+/* Footer */
+.footer {
+  @apply w-full py-6 px-4 border-t border-black/20;
+}
+
+.footer-text {
+  @apply text-sm text-black text-center;
+}
+
+/* Image Styles */
+.title-gif {
+  @apply w-24 h-24 sm:w-32 sm:h-32 md:w-56 md:h-56;
+  margin: 0 -1rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .title-gif {
+    margin: 0 -1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .title-gif {
+    margin: 0 -3rem;
+  }
+}
+
+/* Home Link Styles */
+.home-link-container {
+  @apply absolute left-4 md:left-8 flex items-center;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  height: fit-content;
+}
+
+.home-link {
+  @apply text-sm md:text-base font-bold text-black flex items-center cursor-pointer;
+  font-family: 'TG Girthy Ultra', sans-serif;
+  letter-spacing: 0.03em;
+  gap: 0;
+  flex-wrap: nowrap;
+  pointer-events: auto;
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.home-link span {
+  margin: 0 -0.15rem;
+}
+
+@media (min-width: 640px) {
+  .home-link span {
+    margin: 0 -0.2rem;
+  }
+}
+
+.home-link-gif {
+  @apply w-6 h-6 md:w-8 md:h-8;
+  margin: 0 -0.5rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .home-link-gif {
+    margin: 0 -0.75rem;
+  }
 }
 
