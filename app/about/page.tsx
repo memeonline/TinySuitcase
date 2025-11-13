@@ -15,22 +15,22 @@ export default function About() {
     <main className="main-container">
       {/* Navigation Menu */}
       <nav className="nav">
-        {/* Home Link */}
-        <motion.div
-          className="home-link-container"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: 0 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Link href="/" className="home-link">
-            <span>TINY</span>
-            <span>SUITCASE</span>
-          </Link>
-        </motion.div>
-
         <div className="nav-container">
+          {/* Home Link */}
+          <motion.div
+            className="home-link-container"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link href="/" className="home-link">
+              <span>TINY</span>
+              <span>SUITCASE</span>
+            </Link>
+          </motion.div>
+
           <div className="nav-menu-items">
             {menuItems.map((item, index) => (
             <motion.div

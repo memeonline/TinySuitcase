@@ -31,10 +31,42 @@
   font-display: swap;
 }
 
+html {
+  height: 100%;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Scroll Snap Container */
+main {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scroll Snap Sections */
+.scroll-snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
 }
 
 /* Main Layout */
@@ -50,16 +82,25 @@ body {
 }
 
 .nav-container {
-  @apply max-w-6xl mx-auto flex justify-center items-center gap-8 md:gap-16;
+  @apply w-full flex items-center gap-8 md:gap-16;
+  position: relative;
 }
 
 .nav-menu-items {
   @apply flex justify-center items-center gap-8 md:gap-16;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: auto;
+  height: 100%;
 }
 
 .menu-link {
   @apply text-black text-sm font-light cursor-pointer relative block uppercase;
   font-family: 'Reddit Mono', monospace;
+  line-height: 1.5;
 }
 
 .menu-underline {
@@ -68,13 +109,15 @@ body {
 
 /* Content Area */
 .content-wrapper {
-  @apply flex-1 flex flex-col items-center justify-center px-4 py-4 md:py-8;
+  @apply flex-1 flex flex-col items-center justify-start px-4 py-4 md:py-8;
   margin-top: -2rem;
+  padding-top: 8vh;
 }
 
 @media (min-width: 768px) {
   .content-wrapper {
     margin-top: -4rem;
+    padding-top: 12vh;
   }
 }
 
@@ -172,15 +215,20 @@ body {
 
 /* Home Link Styles */
 .home-link-container {
-  @apply absolute left-4 md:left-8 flex items-center;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  height: fit-content;
+  @apply flex items-center;
+  position: relative;
+  margin-left: 1.5rem;
+  align-self: center;
+}
+
+@media (min-width: 768px) {
+  .home-link-container {
+    margin-left: 3rem;
+  }
 }
 
 .home-link {
-  @apply text-sm md:text-base font-bold text-black flex items-center cursor-pointer;
+  @apply text-sm md:text-base font-bold text-black flex items-center cursor-pointer relative;
   font-family: 'TG Girthy Ultra', sans-serif;
   letter-spacing: 0.03em;
   gap: 0;
@@ -188,6 +236,9 @@ body {
   pointer-events: auto;
   text-decoration: none;
   line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
 }
 
 .home-link span {
