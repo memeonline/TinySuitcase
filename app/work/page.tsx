@@ -16,23 +16,29 @@ export default function Work() {
       {/* Navigation Menu */}
       <nav className="nav">
         <div className="nav-container">
-          {/* Home Link */}
-          <motion.div
-            className="home-link-container"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href="/" className="home-link">
-              <span>TINY</span>
-              <span>SUITCASE</span>
-            </Link>
-          </motion.div>
-
           <div className="nav-menu-items">
-            {menuItems.map((item, index) => (
+            {/* Home Link */}
+            <motion.div
+              className="home-link-in-menu"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="/" className="menu-link" style={{ fontFamily: "'TG Girthy Ultra', sans-serif", fontWeight: 'bold', fontSize: '0.875rem', letterSpacing: '0.03em' }}>
+                TINY SUITCASE
+                <motion.span
+                  className="menu-underline"
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.3 }}
+                />
+              </Link>
+            </motion.div>
+
+            {/* Centered menu items container */}
+            <div className="nav-menu-items-centered">
+              {menuItems.map((item, index) => (
             <motion.div
               key={item.label}
               initial={{ opacity: 0, y: -10 }}
@@ -51,6 +57,7 @@ export default function Work() {
               </Link>
             </motion.div>
           ))}
+            </div>
           </div>
         </div>
       </nav>

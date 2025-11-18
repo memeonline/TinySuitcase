@@ -81,7 +81,7 @@ main {
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: var(--cream-bg);
+  background-color: transparent;
   margin-top: 0;
 }
 
@@ -108,22 +108,49 @@ main {
 }
 
 .nav-menu-items {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
   position: absolute;
   left: 50%;
-  top: 0;
+  top: 10px;
   transform: translateX(-50%);
   z-index: 101;
   pointer-events: auto;
   height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+/* Centered menu items container - always stays in center */
+.nav-menu-items-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  position: relative;
 }
 
 @media (min-width: 768px) {
-  .nav-menu-items {
+  .nav-menu-items-centered {
     gap: 6rem;
+  }
+}
+
+/* Home link in the same flex row, positioned to the left */
+.home-link-in-menu {
+  position: absolute;
+  left: calc(2rem + 40px);
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .home-link-in-menu {
+    left: calc(4rem + 40px);
   }
 }
 
@@ -339,13 +366,15 @@ main {
   display: flex;
   align-items: center;
   position: relative;
-  margin-left: 1.5rem;
-  align-self: center;
+  margin-left: 2rem;
+  align-self: flex-start; /* Align to top instead of center */
+  margin-top: 12px; /* Slightly lower to match visual center of menu items */
 }
 
 @media (min-width: 768px) {
   .home-link-container {
-    margin-left: 3rem;
+    margin-left: 4rem; /* More to the right on desktop */
+    margin-top: 12px; /* Slightly lower to match visual center of menu items */
   }
 }
 

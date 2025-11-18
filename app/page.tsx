@@ -1,7 +1,7 @@
 // Home Page - / route
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
@@ -56,10 +56,12 @@ function AnimatedSection1() {
         const response = await fetch('/api/images')
         if (response.ok) {
           const data = await response.json()
+          console.log('Loaded images from API:', data.images?.length || 0, 'images')
           setSection1Images(data.images || [])
           setImagesLoaded(true)
         } else {
-          console.error('Failed to load images')
+          const errorData = await response.json().catch(() => ({}))
+          console.error('Failed to load images:', response.status, errorData)
           setImagesLoaded(true) // Set to true to prevent retries
         }
       } catch (error) {
@@ -106,7 +108,7 @@ function AnimatedSection1() {
     // Previous image starts at delay = prevProps.delay
     // It needs to travel: image width + some buffer to clear entry point
     // Time needed = (width + buffer) / speed
-    const buffer = 3 // 3vw buffer to prevent overlap (reduced to allow more images)
+    const buffer = 5 // 5vw buffer to prevent overlap (increased for production stability)
     const clearTime = (prevProps.width + buffer) / prevProps.speed
     const prevImageClearsAt = prevProps.delay + clearTime
     
@@ -123,8 +125,8 @@ function AnimatedSection1() {
     setShuffledImages(shuffled)
     setAllImagesShown(false)
     
-    // Show 12-18 images at a time (random count) for more visual density
-    const numImages = Math.min(12 + Math.floor(Math.random() * 7), shuffled.length)
+    // Show 10-15 images at a time to ensure 5-8 are visible simultaneously
+    const numImages = Math.min(10 + Math.floor(Math.random() * 6), shuffled.length)
     
     // Select random images from shuffled array (not just first ones)
     const selectedIndices = new Set<number>()
@@ -140,8 +142,9 @@ function AnimatedSection1() {
     const newProps = new Map<string, any>()
     const newCycleCount = new Map<string, number>()
     
-    // Start many images almost simultaneously to get lots on screen quickly
-    let cumulativeDelay = 0
+    // Start images with smart spacing to prevent overlap based on vertical position
+    const previousProps: Array<{ delay: number; width: number; speed: number; topPosition: number }> = []
+    
     initialImages.forEach((image, index) => {
       // Get current cycle count and increment for this appearance
       const currentCycle = (imageCycleCount.get(image) || 0) + 1
@@ -149,24 +152,45 @@ function AnimatedSection1() {
       
       const baseProps = generateImageProperties(image, currentCycle)
       
-      // Stagger images very quickly: first 6-8 images start almost simultaneously (0-0.2s apart),
-      // then continue with 0.1-0.3s spacing for more images on screen
-      if (index > 0) {
-        let delayIncrement: number
-        if (index < 8) {
-          delayIncrement = 0.05 + Math.random() * 0.15 // 0.05-0.2s between first 8 images (very quick)
-        } else {
-          delayIncrement = 0.1 + Math.random() * 0.2 // 0.1-0.3s for rest (still quick)
-        }
-        cumulativeDelay += delayIncrement
+      // Calculate base delay increment - start images very quickly to get many on screen
+      let delayIncrement: number
+      if (index < 8) {
+        delayIncrement = 0.05 + Math.random() * 0.15 // 0.05-0.2s between first 8 images (very fast)
+      } else {
+        delayIncrement = 0.1 + Math.random() * 0.2 // 0.1-0.3s for rest (still fast)
+      }
+      
+      const lastDelay = previousProps.length > 0 
+        ? previousProps[previousProps.length - 1].delay 
+        : 0
+      const baseDelay = lastDelay + delayIncrement
+      
+      // Only prevent overlap if images are within 15% vertical distance (tighter threshold = more images can appear)
+      // This allows more images on screen simultaneously
+      let calculatedDelay = baseDelay
+      const similarVerticalProps = previousProps.filter(props => 
+        Math.abs(baseProps.topPosition - props.topPosition) < 15
+      )
+      
+      if (similarVerticalProps.length > 0) {
+        // Find the latest finish time among similar vertical position images
+        const latestFinishTime = similarVerticalProps.reduce((max, props) => {
+          const finishTime = props.delay + ((props.width + 3) / props.speed) // width + smaller buffer / speed
+          return Math.max(max, finishTime)
+        }, 0)
+        
+        // New image should start after the latest finish, or at baseDelay, whichever is later
+        // Minimal buffer - prioritize getting images on screen
+        calculatedDelay = Math.max(baseDelay, latestFinishTime + 0.05) // Very small buffer - 0.05s
       }
       
       const props: { delay: number; width: number; speed: number; topPosition: number } = {
         ...baseProps,
-        delay: cumulativeDelay, // All delays relative to page load (0s for first image)
+        delay: calculatedDelay,
       }
       
       newProps.set(image, props)
+      previousProps.push(props)
     })
     setImageCycleCount((prev) => {
       const updated = new Map(prev)
@@ -179,19 +203,89 @@ function AnimatedSection1() {
     setAllImagesShown(true)
   }, [imagesLoaded, section1Images])
 
-  // Replace finished images with new ones to maintain 12-18 active images
-  // Track when each image was added to calculate finish time correctly
+  // Replace finished images with new ones to maintain 10-15 active images (ensures 5-8 visible)
+  // Track when each image was added and which images have timeouts set up
   const imageAddTimeRef = useRef<Map<string, number>>(new Map())
+  const timeoutRef = useRef<Map<string, NodeJS.Timeout>>(new Map())
+  
+  // Helper function to replace an image
+  const replaceImage = (finishedImage: string) => {
+    if (shuffledImages.length === 0) return
+    
+    // Clean up old image
+    const oldTimeout = timeoutRef.current.get(finishedImage)
+    if (oldTimeout) {
+      clearTimeout(oldTimeout)
+      timeoutRef.current.delete(finishedImage)
+    }
+    imageAddTimeRef.current.delete(finishedImage)
+    
+    // Get current active images using setState callback
+    setActiveImages((prevActiveImages) => {
+      const remainingImages = prevActiveImages.filter((img) => img !== finishedImage)
+      const availableImages = shuffledImages.filter(img => !remainingImages.includes(img))
+      
+      let newImage: string
+      if (availableImages.length === 0) {
+        newImage = shuffledImages[Math.floor(Math.random() * shuffledImages.length)]
+      } else {
+        newImage = availableImages[Math.floor(Math.random() * availableImages.length)]
+      }
+      
+      const currentTime = Date.now()
+      imageAddTimeRef.current.set(newImage, currentTime)
+      
+      // Generate properties for new image - read current cycle count
+      setImageCycleCount((prevCycle) => {
+        const currentCycle = prevCycle.get(newImage) || 0
+        const newCycle = currentCycle + 1
+        const updated = new Map(prevCycle)
+        updated.set(newImage, newCycle)
+        
+        const newProps = generateImageProperties(newImage, newCycle)
+        
+        // Calculate delay - very quick start for replacement images
+        const delayBetween = 0.05 + Math.random() * 0.15 // 0.05-0.2s - very fast
+        
+        // Set properties BEFORE adding to activeImages
+        setImageProperties((prevProps) => {
+          const updated = new Map(prevProps)
+          updated.set(newImage, {
+            ...newProps,
+            delay: delayBetween,
+          })
+          return updated
+        })
+        
+        return updated
+      })
+      
+      // Return updated list - properties are set in state, will be available when useEffect runs
+      if (!remainingImages.includes(newImage)) {
+        return [...remainingImages, newImage]
+      }
+      return remainingImages
+    })
+  }
   
   useEffect(() => {
     if (!allImagesShown || activeImages.length === 0 || shuffledImages.length === 0) return
 
-    const timeouts: NodeJS.Timeout[] = []
     const currentTimeMs = Date.now()
 
     activeImages.forEach((image) => {
+      // Skip if timeout already exists for this image
+      if (timeoutRef.current.has(image)) return
+      
       const props = imageProperties.get(image)
-      if (!props) return
+      if (!props) {
+        // Properties not ready yet, wait a bit and retry more frequently
+        const retryTimeout = setTimeout(() => {
+          timeoutRef.current.delete(image)
+        }, 50) // Faster retry
+        timeoutRef.current.set(image, retryTimeout)
+        return
+      }
 
       // Check if this image was just added (replacement) or is an initial image
       const addTime = imageAddTimeRef.current.get(image)
@@ -213,66 +307,25 @@ function AnimatedSection1() {
         timeUntilFinishMs = Math.max((finishTimeSeconds - timeSinceMountSeconds) * 1000, 0)
       }
       
-      if (timeUntilFinishMs <= 0) return
+      // If image already finished or will finish very soon, replace it immediately
+      if (timeUntilFinishMs <= 50) {
+        replaceImage(image)
+        return
+      }
 
+      // Set up timeout to replace when image finishes
       const timeout = setTimeout(() => {
-        // Remove finished image and add new one in single update
-        setActiveImages((prev) => {
-          const remainingImages = prev.filter((img) => img !== image)
-          imageAddTimeRef.current.delete(image)
-          
-          // Pick a random image from the pool that's not currently active
-          const availableImages = shuffledImages.filter(img => !remainingImages.includes(img))
-          let newImage: string
-          
-          if (availableImages.length === 0) {
-            // If all images are active, pick a random one from the pool anyway
-            newImage = shuffledImages[Math.floor(Math.random() * shuffledImages.length)]
-          } else {
-            newImage = availableImages[Math.floor(Math.random() * availableImages.length)]
-          }
-          
-          // Track when this new image is added
-          imageAddTimeRef.current.set(newImage, Date.now())
-          
-          // Generate new properties for this image
-          setImageCycleCount((prevCycle) => {
-            const currentCycle = prevCycle.get(newImage) || 0
-            const newCycle = currentCycle + 1
-            const updated = new Map(prevCycle)
-            updated.set(newImage, newCycle)
-            
-            // Calculate delay for new image - use very small delay (0.05-0.2 seconds) relative to when element is created
-            // This allows many images to appear quickly on screen simultaneously
-            const delayBetween = 0.05 + Math.random() * 0.15 // 0.05-0.2 seconds (very quick)
-            const newDelay = delayBetween
-            
-            const newProps = generateImageProperties(newImage, newCycle)
-            
-            // Store properties with delay relative to when element is added (0.05-0.2 seconds)
-            setImageProperties((prevProps) => {
-              const updated = new Map(prevProps)
-              updated.set(newImage, {
-                ...newProps,
-                delay: newDelay, // This is relative to when the element is added to DOM
-              })
-              return updated
-            })
-            
-            return updated
-          })
-          
-          return [...remainingImages, newImage]
-        })
+        timeoutRef.current.delete(image)
+        replaceImage(image)
       }, timeUntilFinishMs)
 
-      timeouts.push(timeout)
+      timeoutRef.current.set(image, timeout)
     })
 
     return () => {
-      timeouts.forEach((timeout) => clearTimeout(timeout))
+      // Cleanup is handled by timeoutRef in replaceImage function
     }
-  }, [activeImages, allImagesShown, shuffledImages, imageProperties])
+  }, [activeImages, allImagesShown, shuffledImages, imageProperties, imageCycleCount])
 
 
   // Cycle through texts every 5 seconds
@@ -389,6 +442,34 @@ export default function ComingSoon() {
     { label: 'Work', href: '/work' },
   ]
 
+  const [showHomeLink, setShowHomeLink] = useState(false)
+
+  // Track scroll position to show/hide home link
+  useEffect(() => {
+    const handleScroll = () => {
+      const main = document.querySelector('main')
+      if (main) {
+        const scrollTop = main.scrollTop
+        // Show home link when scrolled down more than 100px
+        setShowHomeLink(scrollTop > 100)
+      }
+    }
+
+    const main = document.querySelector('main')
+    if (main) {
+      main.addEventListener('scroll', handleScroll)
+      return () => main.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  // Function to scroll to top
+  const scrollToTop = () => {
+    const main = document.querySelector('main')
+    if (main) {
+      main.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
     <main>
       {/* Section 0 - Main Page */}
@@ -397,25 +478,69 @@ export default function ComingSoon() {
         <nav className="nav">
           <div className="nav-container">
             <div className="nav-menu-items">
-              {menuItems.map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link href={item.href} className="menu-link">
-                    {item.label}
-                    <motion.span
-                      className="menu-underline"
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </motion.div>
-              ))}
+              {/* Home Link - only visible when scrolled on main page, positioned absolutely */}
+              <AnimatePresence>
+                {showHomeLink && (
+                  <motion.div
+                    key="home-link"
+                    className="home-link-in-menu"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <button 
+                      onClick={scrollToTop} 
+                      className="menu-link" 
+                      style={{ 
+                        background: 'none', 
+                        border: 'none', 
+                        padding: 0, 
+                        cursor: 'pointer', 
+                        fontFamily: "'TG Girthy Ultra', sans-serif", 
+                        fontWeight: 'bold', 
+                        fontSize: '0.875rem', 
+                        letterSpacing: '0.03em',
+                        pointerEvents: 'auto',
+                        position: 'relative',
+                        zIndex: 103
+                      }}
+                    >
+                      TINY SUITCASE
+                      <motion.span
+                        className="menu-underline"
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Centered menu items container */}
+              <div className="nav-menu-items-centered">
+                {menuItems.map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Link href={item.href} className="menu-link">
+                      {item.label}
+                      <motion.span
+                        className="menu-underline"
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </nav>
