@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 declare global {
   interface Window {
@@ -14,41 +14,7 @@ declare global {
   }
 }
 
-// Image files from section1 folder (excluding MOV files)
-const section1Images = [
-  'IMG_0069.jpeg',
-  'IMG_0098.JPG',
-  'IMG_1191.jpeg',
-  'IMG_1724.jpeg',
-  'IMG_2011.jpeg',
-  'IMG_2015.jpeg',
-  'IMG_2046.jpeg',
-  'IMG_2048.jpeg',
-  'IMG_2050.jpeg',
-  'IMG_2052.jpeg',
-  'IMG_2381.jpeg',
-  'IMG_2446.jpeg',
-  'IMG_2461.jpeg',
-  'IMG_3778.jpg',
-  'IMG_4839.jpeg',
-  'IMG_5169.jpeg',
-  'IMG_5256.jpg',
-  'IMG_5575.jpeg',
-  'IMG_6106.jpg',
-  'IMG_7496.jpeg',
-  'IMG_7771.jpg',
-  'IMG_7798.jpeg',
-  'IMG_8499.jpeg',
-  'IMG_8760.jpeg',
-  'IMG_9044.jpeg',
-  'IMG_9302.jpeg',
-  'IMG_9321.jpeg',
-  'IMG_9326.jpeg',
-  'IMG_9702.jpeg',
-  'IMG_9719.jpeg',
-  'IMG_9751.jpeg',
-  'IMG_9933.jpeg',
-]
+// Images will be loaded dynamically from the folder
 
 const cyclingTexts = [
   'INFLUENCER MARKETING',
@@ -64,106 +30,250 @@ function AnimatedSection1() {
   const [imageIndex, setImageIndex] = useState(0) // Track position in shuffled array
   const [shuffledImages, setShuffledImages] = useState<string[]>([])
   const [allImagesShown, setAllImagesShown] = useState(false) // Track if all images have been shown
+  const [section1Images, setSection1Images] = useState<string[]>([]) // Images loaded from folder
+  const [imagesLoaded, setImagesLoaded] = useState(false) // Track if images have been loaded
+  // Store properties for each image by filename and cycle - updates each appearance
+  const [imageProperties, setImageProperties] = useState<Map<string, {
+    width: number
+    speed: number
+    zIndex: number
+    delay: number
+    topPosition: number
+    height: number
+    cycle: number // Track appearance cycle
+  }>>(new Map())
+  // Track how many times each image has appeared
+  const [imageCycleCount, setImageCycleCount] = useState<Map<string, number>>(new Map())
+  // Track when component mounted (page load time) for delay calculations
+  const mountTimeRef = useRef<number>(Date.now())
 
-  // Initialize: shuffle all images and start showing them
+  // Load images from folder on mount - only once
   useEffect(() => {
+    if (imagesLoaded) return // Only load once
+
+    const loadImages = async () => {
+      try {
+        const response = await fetch('/api/images')
+        if (response.ok) {
+          const data = await response.json()
+          setSection1Images(data.images || [])
+          setImagesLoaded(true)
+        } else {
+          console.error('Failed to load images')
+          setImagesLoaded(true) // Set to true to prevent retries
+        }
+      } catch (error) {
+        console.error('Error loading images:', error)
+        setImagesLoaded(true) // Set to true to prevent retries
+      }
+    }
+
+    loadImages()
+  }, [imagesLoaded])
+
+  // Helper function to generate random properties for an image
+  // cycle: appearance number (1, 2, 3, etc.) - different cycle = different random properties
+  const generateImageProperties = (imageName: string, cycle: number) => {
+    // Use image name + cycle with large prime multipliers to ensure completely different properties each appearance
+    // Cycle increments ensure each appearance has different random properties (no patterns)
+    const imageHash = imageName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+    // Use large primes to ensure good distribution and no patterns
+    const seed = imageHash + (cycle * 7919) + (cycle * cycle * 9973)
+    const rng = (offset: number) => {
+      const x = Math.sin((seed + offset) * 12.9898) * 43758.5453
+      return x - Math.floor(x)
+    }
+    
+    return {
+      width: 5 + rng(1) * 10, // 5-15% viewport width
+      speed: 0.1 + rng(2) * 0.2, // 0.1 to 0.3
+      zIndex: rng(3) > 0.5 ? 11 : 4,
+      topPosition: 15 + rng(4) * 70, // 15% to 85%
+      height: 40 + rng(5) * 40, // 40-80vh
+      cycle: cycle, // Track which appearance cycle this is
+    }
+  }
+  
+
+  // Helper to calculate minimum delay needed to prevent overlap
+  // Returns the time when the previous image has cleared the entry point (right edge)
+  const calculateMinDelay = (
+    prevProps: { delay: number; width: number; speed: number; topPosition?: number } | null,
+    newDelay: number
+  ): number => {
+    if (!prevProps) return newDelay
+    
+    // Previous image starts at delay = prevProps.delay
+    // It needs to travel: image width + some buffer to clear entry point
+    // Time needed = (width + buffer) / speed
+    const buffer = 3 // 3vw buffer to prevent overlap (reduced to allow more images)
+    const clearTime = (prevProps.width + buffer) / prevProps.speed
+    const prevImageClearsAt = prevProps.delay + clearTime
+    
+    // New image should start after previous clears, or at newDelay, whichever is later
+    return Math.max(prevImageClearsAt, newDelay)
+  }
+
+  // Initialize: shuffle all images and start showing them (when images are loaded)
+  useEffect(() => {
+    if (!imagesLoaded || section1Images.length === 0) return
+
+    // Fully random shuffle
     const shuffled = [...section1Images].sort(() => Math.random() - 0.5)
     setShuffledImages(shuffled)
     setAllImagesShown(false)
-    // Show 5-8 images at a time
-    const numImages = Math.min(5 + Math.floor(Math.random() * 4), shuffled.length)
-    setActiveImages(shuffled.slice(0, numImages))
+    
+    // Show 12-18 images at a time (random count) for more visual density
+    const numImages = Math.min(12 + Math.floor(Math.random() * 7), shuffled.length)
+    
+    // Select random images from shuffled array (not just first ones)
+    const selectedIndices = new Set<number>()
+    while (selectedIndices.size < numImages) {
+      selectedIndices.add(Math.floor(Math.random() * shuffled.length))
+    }
+    const initialImages = Array.from(selectedIndices).map(idx => shuffled[idx])
+    
+    setActiveImages(initialImages)
     setImageIndex(numImages)
-  }, [])
-
-  // Periodically add new images from the shuffled array
-  useEffect(() => {
-    if (shuffledImages.length === 0) return
-
-    const interval = setInterval(() => {
-      // If we've shown all images, stop adding new ones
-      if (imageIndex >= shuffledImages.length) {
-        setAllImagesShown(true)
-        return
+    
+    // Generate properties for initial images - random properties, quick sequential starts
+    const newProps = new Map<string, any>()
+    const newCycleCount = new Map<string, number>()
+    
+    // Start many images almost simultaneously to get lots on screen quickly
+    let cumulativeDelay = 0
+    initialImages.forEach((image, index) => {
+      // Get current cycle count and increment for this appearance
+      const currentCycle = (imageCycleCount.get(image) || 0) + 1
+      newCycleCount.set(image, currentCycle)
+      
+      const baseProps = generateImageProperties(image, currentCycle)
+      
+      // Stagger images very quickly: first 6-8 images start almost simultaneously (0-0.2s apart),
+      // then continue with 0.1-0.3s spacing for more images on screen
+      if (index > 0) {
+        let delayIncrement: number
+        if (index < 8) {
+          delayIncrement = 0.05 + Math.random() * 0.15 // 0.05-0.2s between first 8 images (very quick)
+        } else {
+          delayIncrement = 0.1 + Math.random() * 0.2 // 0.1-0.3s for rest (still quick)
+        }
+        cumulativeDelay += delayIncrement
       }
+      
+      const props: { delay: number; width: number; speed: number; topPosition: number } = {
+        ...baseProps,
+        delay: cumulativeDelay, // All delays relative to page load (0s for first image)
+      }
+      
+      newProps.set(image, props)
+    })
+    setImageCycleCount((prev) => {
+      const updated = new Map(prev)
+      newCycleCount.forEach((count, image) => updated.set(image, count))
+      return updated
+    })
+    setImageProperties(newProps)
+    
+    // Mark as all shown immediately - no duplicates needed
+    setAllImagesShown(true)
+  }, [imagesLoaded, section1Images])
 
-      setActiveImages((current) => {
-        // Remove 1-2 old images
-        const toRemove = 1 + Math.floor(Math.random() * 2)
-        const updated = current.slice(toRemove)
-        
-        // Add new images from shuffled array (only if we haven't shown all yet)
-        const remaining = shuffledImages.length - imageIndex
-        if (remaining > 0) {
-          const toAdd = Math.min(toRemove, remaining)
-          const newImages = shuffledImages.slice(imageIndex, imageIndex + toAdd)
-          const newIndex = imageIndex + toAdd
+  // Replace finished images with new ones to maintain 12-18 active images
+  // Track when each image was added to calculate finish time correctly
+  const imageAddTimeRef = useRef<Map<string, number>>(new Map())
+  
+  useEffect(() => {
+    if (!allImagesShown || activeImages.length === 0 || shuffledImages.length === 0) return
+
+    const timeouts: NodeJS.Timeout[] = []
+    const currentTimeMs = Date.now()
+
+    activeImages.forEach((image) => {
+      const props = imageProperties.get(image)
+      if (!props) return
+
+      // Check if this image was just added (replacement) or is an initial image
+      const addTime = imageAddTimeRef.current.get(image)
+      const animationDurationSeconds = props.speed * 100
+      
+      let timeUntilFinishMs: number
+      
+      if (addTime) {
+        // Replacement image: delay is relative to when element was added
+        const timeSinceAddMs = currentTimeMs - addTime
+        const timeSinceAddSeconds = timeSinceAddMs / 1000
+        const finishTimeSeconds = props.delay + animationDurationSeconds
+        timeUntilFinishMs = Math.max((finishTimeSeconds - timeSinceAddSeconds) * 1000, 0)
+      } else {
+        // Initial image: delay is relative to page load
+        const timeSinceMountMs = currentTimeMs - mountTimeRef.current
+        const timeSinceMountSeconds = timeSinceMountMs / 1000
+        const finishTimeSeconds = props.delay + animationDurationSeconds
+        timeUntilFinishMs = Math.max((finishTimeSeconds - timeSinceMountSeconds) * 1000, 0)
+      }
+      
+      if (timeUntilFinishMs <= 0) return
+
+      const timeout = setTimeout(() => {
+        // Remove finished image and add new one in single update
+        setActiveImages((prev) => {
+          const remainingImages = prev.filter((img) => img !== image)
+          imageAddTimeRef.current.delete(image)
           
-          // Check if we've now shown all images
-          if (newIndex >= shuffledImages.length) {
-            setAllImagesShown(true)
+          // Pick a random image from the pool that's not currently active
+          const availableImages = shuffledImages.filter(img => !remainingImages.includes(img))
+          let newImage: string
+          
+          if (availableImages.length === 0) {
+            // If all images are active, pick a random one from the pool anyway
+            newImage = shuffledImages[Math.floor(Math.random() * shuffledImages.length)]
+          } else {
+            newImage = availableImages[Math.floor(Math.random() * availableImages.length)]
           }
           
-          setImageIndex(newIndex)
-          return [...updated, ...newImages]
-        }
-        
-        return updated
-      })
-    }, 15000 + Math.random() * 10000) // Every 15-25 seconds
+          // Track when this new image is added
+          imageAddTimeRef.current.set(newImage, Date.now())
+          
+          // Generate new properties for this image
+          setImageCycleCount((prevCycle) => {
+            const currentCycle = prevCycle.get(newImage) || 0
+            const newCycle = currentCycle + 1
+            const updated = new Map(prevCycle)
+            updated.set(newImage, newCycle)
+            
+            // Calculate delay for new image - use very small delay (0.05-0.2 seconds) relative to when element is created
+            // This allows many images to appear quickly on screen simultaneously
+            const delayBetween = 0.05 + Math.random() * 0.15 // 0.05-0.2 seconds (very quick)
+            const newDelay = delayBetween
+            
+            const newProps = generateImageProperties(newImage, newCycle)
+            
+            // Store properties with delay relative to when element is added (0.05-0.2 seconds)
+            setImageProperties((prevProps) => {
+              const updated = new Map(prevProps)
+              updated.set(newImage, {
+                ...newProps,
+                delay: newDelay, // This is relative to when the element is added to DOM
+              })
+              return updated
+            })
+            
+            return updated
+          })
+          
+          return [...remainingImages, newImage]
+        })
+      }, timeUntilFinishMs)
 
-    return () => clearInterval(interval)
-  }, [shuffledImages, imageIndex])
-
-  // When all images are shown, wait a bit then reshuffle and start over
-  useEffect(() => {
-    if (!allImagesShown || shuffledImages.length === 0) return
-
-    const timeout = setTimeout(() => {
-      const shuffled = [...section1Images].sort(() => Math.random() - 0.5)
-      setShuffledImages(shuffled)
-      setAllImagesShown(false)
-      const numImages = Math.min(5 + Math.floor(Math.random() * 4), shuffled.length)
-      setActiveImages(shuffled.slice(0, numImages))
-      setImageIndex(numImages)
-    }, 30000) // Wait 30 seconds after all shown before restarting
-
-    return () => clearTimeout(timeout)
-  }, [allImagesShown, shuffledImages.length])
-
-  // Generate simple random properties for each image
-  const imageProps = useMemo(() => {
-    if (activeImages.length === 0) return []
-    
-    return activeImages.map((_, index) => {
-      // Simple random width
-      const width = 5 + Math.random() * 10 // 5-15% viewport width
-      
-      // Simple random speed
-      const speed = 0.15 + Math.random() * 0.2 // 0.15 to 0.35
-      
-      // Random z-index
-      const zIndex = Math.random() > 0.5 ? 11 : 4
-      
-      // Random vertical position (avoid nav area)
-      const topPosition = 25 + Math.random() * 60 // 25% to 85%
-      
-      // Random delay - space them out
-      const delay = index * 2 + Math.random() * 3 // Stagger by 2s + random
-      
-      // Random height
-      const height = 40 + Math.random() * 40 // 40-80vh
-      
-      return {
-        width,
-        speed,
-        zIndex,
-        delay,
-        topPosition,
-        height,
-      }
+      timeouts.push(timeout)
     })
-  }, [activeImages])
+
+    return () => {
+      timeouts.forEach((timeout) => clearTimeout(timeout))
+    }
+  }, [activeImages, allImagesShown, shuffledImages, imageProperties])
+
 
   // Cycle through texts every 5 seconds
   useEffect(() => {
@@ -195,48 +305,17 @@ function AnimatedSection1() {
       {/* Scrolling Images Container */}
       <div className="scrolling-images-container">
         {activeImages.length > 0 && activeImages.map((image, index) => {
-          const props = imageProps[index]
+          const props = imageProperties.get(image)
           if (!props) return null
           return (
             <div
-              key={`${image}-${index}`}
+              key={image}
               className="scrolling-image-wrapper"
               style={{
                 '--image-width': `${props.width}vw`,
                 '--image-height': `${props.height}vh`,
                 '--scroll-speed': `${props.speed * 100}s`,
                 '--start-delay': `-${props.delay}s`,
-                '--top-position': `${props.topPosition}%`,
-                zIndex: props.zIndex,
-              } as React.CSSProperties}
-            >
-              <Image
-                src={`/images/section1/${image}`}
-                alt=""
-                width={800}
-                height={600}
-                className="scrolling-image"
-                unoptimized
-              />
-            </div>
-          )
-        })}
-        {/* Duplicate set for seamless loop - only show after all images have been displayed */}
-        {allImagesShown && activeImages.length > 0 && activeImages.map((image, index) => {
-          const props = imageProps[index]
-          if (!props) return null
-          const animationDuration = props.speed * 100
-          // Simple duplicate delay: start after original finishes
-          const duplicateDelay = props.delay + animationDuration + 3 // 3s buffer between repetitions
-          return (
-            <div
-              key={`${image}-${index}-dup`}
-              className="scrolling-image-wrapper"
-              style={{
-                '--image-width': `${props.width}vw`,
-                '--image-height': `${props.height}vh`,
-                '--scroll-speed': `${animationDuration}s`,
-                '--start-delay': `-${duplicateDelay}s`,
                 '--top-position': `${props.topPosition}%`,
                 zIndex: props.zIndex,
               } as React.CSSProperties}

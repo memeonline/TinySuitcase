@@ -566,7 +566,7 @@ main {
   width: var(--image-width, 20vw);
   height: var(--image-height, 50vh);
   transform: translateY(-50%);
-  animation: scroll-right-to-left var(--scroll-speed, 10s) linear infinite;
+  animation: scroll-right-to-left var(--scroll-speed, 10s) linear forwards;
   animation-delay: var(--start-delay, 0s);
   pointer-events: none;
   will-change: transform;
