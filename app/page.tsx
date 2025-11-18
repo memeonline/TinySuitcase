@@ -125,8 +125,8 @@ function AnimatedSection1() {
     setShuffledImages(shuffled)
     setAllImagesShown(false)
     
-    // Show 12-15 images at a time to ensure at least 5 are always visible
-    const numImages = Math.min(12 + Math.floor(Math.random() * 4), shuffled.length)
+    // Show 18-22 images at a time to ensure many images are always visible
+    const numImages = Math.min(18 + Math.floor(Math.random() * 5), shuffled.length)
     
     // Select random images from shuffled array (not just first ones)
     const selectedIndices = new Set<number>()
@@ -203,13 +203,13 @@ function AnimatedSection1() {
     setAllImagesShown(true)
   }, [imagesLoaded, section1Images])
 
-  // Replace finished images with new ones to maintain at least 10 active images (ensures at least 5 visible)
+  // Replace finished images with new ones to maintain at least 18 active images (ensures many visible)
   // Track when each image was added and which images have timeouts set up
   const imageAddTimeRef = useRef<Map<string, number>>(new Map())
   const timeoutRef = useRef<Map<string, NodeJS.Timeout>>(new Map())
   
-  // Minimum number of active images to ensure at least 5 are visible at any time
-  const MIN_ACTIVE_IMAGES = 10
+  // Minimum number of active images to ensure many are visible at any time
+  const MIN_ACTIVE_IMAGES = 18
   
   // Helper function to add a new image
   const addNewImage = (existingImages: string[]): string | null => {
@@ -305,7 +305,7 @@ function AnimatedSection1() {
   useEffect(() => {
     if (!allImagesShown || shuffledImages.length === 0) return
     
-    // Ensure minimum number of active images (at least 10 to guarantee 5 visible)
+    // Ensure minimum number of active images (at least 18 to guarantee many visible)
     if (activeImages.length < MIN_ACTIVE_IMAGES) {
       ensureMinimumImages()
       return // Will re-run when activeImages updates
