@@ -124,11 +124,42 @@ main {
 
 /* Centered menu items container - always stays in center */
 .nav-menu-items-centered {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 3%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 101;
+  /* Services (middle item) will be in the center column */
+}
+
+/* Re-enable pointer events for menu items */
+.nav-menu-items-centered > * {
+  pointer-events: auto;
+}
+
+/* Position About in left column */
+.nav-menu-items-centered > *:nth-child(1) {
+  grid-column: 1;
+  justify-self: end;
+}
+
+/* Position Services in center column - will be at exact screen center */
+.nav-menu-items-centered > *:nth-child(2) {
+  grid-column: 2;
+  justify-self: center;
   position: relative;
+}
+
+/* Position Work in right column */
+.nav-menu-items-centered > *:nth-child(3) {
+  grid-column: 3;
+  justify-self: start;
 }
 
 @media (min-width: 768px) {
@@ -146,6 +177,14 @@ main {
   display: flex;
   align-items: center;
   pointer-events: auto;
+  z-index: 103;
+}
+
+.home-link-in-menu a,
+.home-link-in-menu a * {
+  pointer-events: auto;
+  position: relative;
+  z-index: 104;
 }
 
 @media (min-width: 768px) {

@@ -125,8 +125,8 @@ function AnimatedSection1() {
     setShuffledImages(shuffled)
     setAllImagesShown(false)
     
-    // Show 10-15 images at a time to ensure 5-8 are visible simultaneously
-    const numImages = Math.min(10 + Math.floor(Math.random() * 6), shuffled.length)
+    // Show 12-15 images at a time to ensure at least 5 are always visible
+    const numImages = Math.min(12 + Math.floor(Math.random() * 4), shuffled.length)
     
     // Select random images from shuffled array (not just first ones)
     const selectedIndices = new Set<number>()
@@ -203,10 +203,56 @@ function AnimatedSection1() {
     setAllImagesShown(true)
   }, [imagesLoaded, section1Images])
 
-  // Replace finished images with new ones to maintain 10-15 active images (ensures 5-8 visible)
+  // Replace finished images with new ones to maintain at least 10 active images (ensures at least 5 visible)
   // Track when each image was added and which images have timeouts set up
   const imageAddTimeRef = useRef<Map<string, number>>(new Map())
   const timeoutRef = useRef<Map<string, NodeJS.Timeout>>(new Map())
+  
+  // Minimum number of active images to ensure at least 5 are visible at any time
+  const MIN_ACTIVE_IMAGES = 10
+  
+  // Helper function to add a new image
+  const addNewImage = (existingImages: string[]): string | null => {
+    if (shuffledImages.length === 0) return null
+    
+    const availableImages = shuffledImages.filter(img => !existingImages.includes(img))
+    let newImage: string
+    if (availableImages.length === 0) {
+      newImage = shuffledImages[Math.floor(Math.random() * shuffledImages.length)]
+    } else {
+      newImage = availableImages[Math.floor(Math.random() * availableImages.length)]
+    }
+    
+    const currentTime = Date.now()
+    imageAddTimeRef.current.set(newImage, currentTime)
+    
+    // Generate properties for new image - read current cycle count
+    setImageCycleCount((prevCycle) => {
+      const currentCycle = prevCycle.get(newImage) || 0
+      const newCycle = currentCycle + 1
+      const updated = new Map(prevCycle)
+      updated.set(newImage, newCycle)
+      
+      const newProps = generateImageProperties(newImage, newCycle)
+      
+      // Calculate delay - very quick start for replacement images
+      const delayBetween = 0.05 + Math.random() * 0.15 // 0.05-0.2s - very fast
+      
+      // Set properties BEFORE adding to activeImages
+      setImageProperties((prevProps) => {
+        const updated = new Map(prevProps)
+        updated.set(newImage, {
+          ...newProps,
+          delay: delayBetween,
+        })
+        return updated
+      })
+      
+      return updated
+    })
+    
+    return newImage
+  }
   
   // Helper function to replace an image
   const replaceImage = (finishedImage: string) => {
@@ -223,53 +269,47 @@ function AnimatedSection1() {
     // Get current active images using setState callback
     setActiveImages((prevActiveImages) => {
       const remainingImages = prevActiveImages.filter((img) => img !== finishedImage)
-      const availableImages = shuffledImages.filter(img => !remainingImages.includes(img))
-      
-      let newImage: string
-      if (availableImages.length === 0) {
-        newImage = shuffledImages[Math.floor(Math.random() * shuffledImages.length)]
-      } else {
-        newImage = availableImages[Math.floor(Math.random() * availableImages.length)]
-      }
-      
-      const currentTime = Date.now()
-      imageAddTimeRef.current.set(newImage, currentTime)
-      
-      // Generate properties for new image - read current cycle count
-      setImageCycleCount((prevCycle) => {
-        const currentCycle = prevCycle.get(newImage) || 0
-        const newCycle = currentCycle + 1
-        const updated = new Map(prevCycle)
-        updated.set(newImage, newCycle)
-        
-        const newProps = generateImageProperties(newImage, newCycle)
-        
-        // Calculate delay - very quick start for replacement images
-        const delayBetween = 0.05 + Math.random() * 0.15 // 0.05-0.2s - very fast
-        
-        // Set properties BEFORE adding to activeImages
-        setImageProperties((prevProps) => {
-          const updated = new Map(prevProps)
-          updated.set(newImage, {
-            ...newProps,
-            delay: delayBetween,
-          })
-          return updated
-        })
-        
-        return updated
-      })
+      const newImage = addNewImage(remainingImages)
       
       // Return updated list - properties are set in state, will be available when useEffect runs
-      if (!remainingImages.includes(newImage)) {
+      if (newImage && !remainingImages.includes(newImage)) {
         return [...remainingImages, newImage]
       }
       return remainingImages
     })
   }
   
+  // Helper function to ensure minimum active images count
+  const ensureMinimumImages = () => {
+    if (shuffledImages.length === 0) return
+    
+    setActiveImages((prevActiveImages) => {
+      if (prevActiveImages.length >= MIN_ACTIVE_IMAGES) {
+        return prevActiveImages
+      }
+      
+      const imagesToAdd = MIN_ACTIVE_IMAGES - prevActiveImages.length
+      const newImages: string[] = []
+      
+      for (let i = 0; i < imagesToAdd; i++) {
+        const newImage = addNewImage([...prevActiveImages, ...newImages])
+        if (newImage) {
+          newImages.push(newImage)
+        }
+      }
+      
+      return [...prevActiveImages, ...newImages]
+    })
+  }
+  
   useEffect(() => {
-    if (!allImagesShown || activeImages.length === 0 || shuffledImages.length === 0) return
+    if (!allImagesShown || shuffledImages.length === 0) return
+    
+    // Ensure minimum number of active images (at least 10 to guarantee 5 visible)
+    if (activeImages.length < MIN_ACTIVE_IMAGES) {
+      ensureMinimumImages()
+      return // Will re-run when activeImages updates
+    }
 
     const currentTimeMs = Date.now()
 
