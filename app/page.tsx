@@ -483,6 +483,7 @@ export default function ComingSoon() {
   ]
 
   const [showHomeLink, setShowHomeLink] = useState(false)
+  const [showCalendlyOverlay, setShowCalendlyOverlay] = useState(false)
 
   // Track scroll position to show/hide home link
   useEffect(() => {
@@ -622,7 +623,7 @@ export default function ComingSoon() {
           {/* Book Consultation Button */}
           <motion.div
             className="button-container"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
@@ -630,26 +631,7 @@ export default function ComingSoon() {
               className="consultation-button"
               onClick={(e) => {
                 e.preventDefault()
-                if (typeof window !== 'undefined') {
-                  if (window.Calendly) {
-                    window.Calendly.initPopupWidget({
-                      url: 'https://calendly.com/tinysuitcasestudios/30min'
-                    })
-                  } else {
-                    // Wait for Calendly to load
-                    const checkCalendly = setInterval(() => {
-                      if (window.Calendly) {
-                        window.Calendly.initPopupWidget({
-                          url: 'https://calendly.com/tinysuitcasestudios/30min'
-                        })
-                        clearInterval(checkCalendly)
-                      }
-                    }, 100)
-                    // Stop checking after 5 seconds
-                    setTimeout(() => clearInterval(checkCalendly), 5000)
-                  }
-                }
-                return false
+                setShowCalendlyOverlay(true)
               }}
             >
               BOOK A CONSULTATION
@@ -772,6 +754,24 @@ export default function ComingSoon() {
           <h2 className="section-title section-title-orange">Section 4</h2>
         </motion.div>
       </section>
+      {showCalendlyOverlay && (
+        <div className="calendly-overlay" onClick={() => setShowCalendlyOverlay(false)}>
+          <div className="calendly-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="calendly-close-button"
+              onClick={() => setShowCalendlyOverlay(false)}
+            >
+              ✕
+            </button>
+            <iframe
+              src="https://calendly.com/tinysuitcasestudios/30min"
+              className="calendly-iframe"
+              title="Book a consultation"
+              frameBorder="0"
+            />
+          </div>
+        </div>
+      )}
     </main>
   )
 }
