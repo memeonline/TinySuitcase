@@ -662,27 +662,103 @@ export default function ComingSoon() {
       <AnimatedSection1 />
 
       {/* Section 2 */}
-      <section className="scroll-snap-section section-green section-content">
+      <section className="scroll-snap-section section-2-svg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
+          className="section-2-container"
         >
-          <h2 className="section-title section-title-green">Section 2</h2>
+          {/* Title */}
+          <h2 className="section-2-title">OUR CORE SERVICES</h2>
+
+          {/* Content with curved line */}
+          <div className="section-2-content">
+            {/* Left side - FOR BRANDS */}
+            <div className="section-2-left">
+              <h3 className="section-2-subtitle">FOR BRANDS:</h3>
+              <ul className="section-2-list">
+                <li>Fora Travel + logistics</li>
+                <li>content-driven itineraries</li>
+                <li>creative direction</li>
+                <li>on-site support</li>
+              </ul>
+            </div>
+
+            {/* Curved line in the middle */}
+            <div className="section-2-curve">
+              <Image
+                src="/images/section2/curveline.png"
+                alt=""
+                width={10}
+                height={300}
+                className="curve-line"
+                unoptimized
+              />
+            </div>
+
+            {/* Right side - FOR HOTELS */}
+            <div className="section-2-right">
+              <h3 className="section-2-subtitle">FOR HOTELS</h3>
+              <ul className="section-2-list">
+                <li>CONTENT</li>
+                <li>CAMPAIGNS</li>
+                <li>INFLUENCER MARKETING</li>
+                <li>BRAND CONCIERGE</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Learn More Button */}
+          <motion.div
+            className="section-2-button-container"
+            initial={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+          >
+            <Link href="/services" className="learn-more-link">
+              <button className="consultation-button learn-more-button">
+                LEARN MORE
+              </button>
+            </Link>
+          </motion.div>
         </motion.div>
       </section>
 
       {/* Section 3 */}
-      <section className="scroll-snap-section section-purple section-content">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title section-title-purple">Section 3</h2>
-        </motion.div>
+      <section className="scroll-snap-section section-3-split">
+        <div className="section-3-container">
+          {/* Left side - 65% */}
+          <motion.div
+            className="section-3-left"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="section-3-title">
+              <span>12 YEARS</span>
+              <span>IN</span>
+              <span>ADVERTISING</span>
+            </h2>
+            <h3 className="section-3-subtitle">
+              TRUSTED BY OVER 50<br />
+              TOP BRANDS & GLOBAL AGENCIES
+            </h3>
+          </motion.div>
+
+          {/* Right side - 35% */}
+          <motion.div
+            className="section-3-right"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Blank for now */}
+          </motion.div>
+        </div>
       </section>
 
       {/* Section 4 */}
