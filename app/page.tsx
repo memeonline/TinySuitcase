@@ -744,15 +744,50 @@ export default function ComingSoon() {
       </section>
 
       {/* Section 4 */}
-      <section className="scroll-snap-section section-orange section-content">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title section-title-orange">Section 4</h2>
-        </motion.div>
+      <section className="scroll-snap-section section-4-split">
+        <div className="section-4-container">
+          {/* Left side - Background image 65% */}
+          <motion.div
+            className="section-4-left"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="section-4-image-wrapper">
+              <Image
+                src="/images/section4/BackgroundSec4.png"
+                alt=""
+                fill
+                className="section-4-image"
+                sizes="(min-width: 1024px) 65vw, 100vw"
+                priority={false}
+              />
+            </div>
+          </motion.div>
+
+          {/* Middle - Title */}
+          <motion.div
+            className="section-4-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            <h2 className="section-4-title">ready to get started?</h2>
+          </motion.div>
+
+          {/* Right - Call to action */}
+          <motion.div
+            className="section-4-right"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <span className="section-4-cta">WORK WITH US</span>
+          </motion.div>
+        </div>
       </section>
       {showCalendlyOverlay && (
         <div className="calendly-overlay" onClick={() => setShowCalendlyOverlay(false)}>

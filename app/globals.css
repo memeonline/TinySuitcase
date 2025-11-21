@@ -995,4 +995,102 @@ main {
   line-height: 1.4;
 }
 
+/* Section 4 Styles */
+.section-4-split {
+  background-color: var(--cream-bg);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.section-4-container {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.section-4-left {
+  width: 65%;
+  position: relative;
+}
+
+.section-4-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.section-4-image {
+  object-fit: cover;
+}
+
+.section-4-center {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  pointer-events: none;
+  text-align: center;
+  z-index: 5;
+  width: 30%;
+}
+
+.section-4-title {
+  font-family: 'TG Girthy Ultra', sans-serif;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+.section-4-right {
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.section-4-cta {
+  font-family: 'Reddit Mono', monospace;
+  font-size: 0.9rem;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+  .section-4-container {
+    flex-direction: column;
+  }
+
+
+  .section-4-right {
+    padding: 0 1.5rem 2rem;
+    justify-content: flex-start;
+    position: static;
+  }
+
+  .section-4-cta {
+    position: static;
+    transform: none;
+  }
+
+}
+
 
