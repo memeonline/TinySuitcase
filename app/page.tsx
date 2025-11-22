@@ -784,7 +784,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -793,7 +793,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -809,7 +809,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -818,7 +818,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -834,7 +834,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -843,7 +843,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -859,7 +859,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -868,7 +868,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -884,7 +884,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -893,7 +893,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -909,7 +909,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -918,7 +918,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -934,7 +934,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -943,7 +943,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -959,7 +959,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -968,7 +968,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -984,7 +984,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -993,7 +993,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
@@ -1009,7 +1009,7 @@ export default function ComingSoon() {
               <div className="credits-item">ELLE</div>
               <div className="credits-item">Gillette Venus</div>
               <div className="credits-item">Olay</div>
-              <div className="credits-item">L'Oreal</div>
+              <div className="credits-item">L&apos;Oreal</div>
               <div className="credits-item">Clean & Clear</div>
               <div className="credits-item">NYFW</div>
               <div className="credits-item">Glosslab</div>
@@ -1018,7 +1018,7 @@ export default function ComingSoon() {
               <div className="credits-item">Weight Watchers</div>
               <div className="credits-item">St. Ives</div>
               <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee's</div>
+              <div className="credits-item">Applebee&apos;s</div>
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
