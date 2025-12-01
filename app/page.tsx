@@ -507,18 +507,35 @@ export default function ComingSoon() {
     }
   }, [])
 
-  // Track when section 3 is in view to change menu color to white
+  // Track when section 2 or section 3 is in view to change menu color
   useEffect(() => {
     const handleScroll = () => {
+      const section2 = document.querySelector('.section-2-svg')
       const section3 = document.querySelector('.section-3-split')
       const nav = document.querySelector('.nav')
-      if (section3 && nav) {
-        const rect = section3.getBoundingClientRect()
-        const isInView = rect.top <= 100 && rect.bottom >= 100
-        if (isInView) {
+      if (nav) {
+        let section2InView = false
+        let section3InView = false
+        
+        if (section2) {
+          const rect = section2.getBoundingClientRect()
+          section2InView = rect.top <= 100 && rect.bottom >= 100
+        }
+        
+        if (section3) {
+          const rect = section3.getBoundingClientRect()
+          section3InView = rect.top <= 100 && rect.bottom >= 100
+        }
+        
+        // Remove all menu color classes first
+        nav.classList.remove('nav-section-2', 'nav-white')
+        
+        // Add appropriate class based on which section is in view
+        // Section 3 takes priority if both are in view
+        if (section3InView) {
           nav.classList.add('nav-white')
-        } else {
-          nav.classList.remove('nav-white')
+        } else if (section2InView) {
+          nav.classList.add('nav-section-2')
         }
       }
     }
@@ -682,20 +699,19 @@ export default function ComingSoon() {
         >
           {/* Two-column layout */}
           <div className="section-2-split">
-            {/* Left side - Text */}
-            <div className="section-2-left-text">
-              <h2 className="section-2-left-title">Do Not Disturb — We&apos;re Working</h2>
+            {/* Left side */}
+            <div className="section-2-left">
             </div>
 
-            {/* Right side - Service lists */}
-            <div className="section-2-right-services">
+            {/* Right side */}
+            <div className="section-2-right">
               {/* Title */}
               <h2 className="section-2-title">CORE SERVICES</h2>
 
               {/* Content - stacked vertically */}
               <div className="section-2-content">
                 {/* FOR BRANDS */}
-                <div className="section-2-left">
+                <div className="section-2-brand-list">
                   <h3 className="section-2-subtitle">FOR BRANDS</h3>
                   <ul className="section-2-list">
                     <li>Fora Travel + logistics</li>
@@ -706,7 +722,7 @@ export default function ComingSoon() {
                 </div>
 
                 {/* FOR HOTELS */}
-                <div className="section-2-right">
+                <div className="section-2-hotel-list">
                   <h3 className="section-2-subtitle">FOR HOTELS</h3>
                   <ul className="section-2-list">
                     <li>CONTENT</li>
@@ -716,22 +732,22 @@ export default function ComingSoon() {
                   </ul>
                 </div>
               </div>
+
+              {/* Learn More Button */}
+              <motion.div
+                className="section-2-button-container"
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+              >
+                <Link href="/services" className="learn-more-link">
+                  <button className="consultation-button learn-more-button">
+                    LEARN MORE
+                  </button>
+                </Link>
+              </motion.div>
             </div>
           </div>
-
-          {/* Learn More Button - centered below */}
-          <motion.div
-            className="section-2-button-container"
-            initial={{ opacity: 1, y: 0 }}
-            animate={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-          >
-            <Link href="/services" className="learn-more-link">
-              <button className="consultation-button learn-more-button">
-                LEARN MORE
-              </button>
-            </Link>
-          </motion.div>
         </motion.div>
       </section>
 
