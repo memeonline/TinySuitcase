@@ -599,7 +599,7 @@ export default function ComingSoon() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Link href={item.href} className={`menu-link ${item.label === 'Work' ? 'menu-link-work' : ''}`}>
+                    <Link href={item.href} className={`menu-link`}>
                       {item.label}
                       <motion.span
                         className="menu-underline"
@@ -680,47 +680,46 @@ export default function ComingSoon() {
           transition={{ duration: 0.8 }}
           className="section-2-container"
         >
-          {/* Title */}
-          <h2 className="section-2-title">OUR CORE SERVICES</h2>
-
-          {/* Content with curved line */}
-          <div className="section-2-content">
-            {/* Left side - FOR BRANDS */}
-            <div className="section-2-left">
-              <h3 className="section-2-subtitle">FOR BRANDS</h3>
-              <ul className="section-2-list">
-                <li>Fora Travel + logistics</li>
-                <li>content-driven itineraries</li>
-                <li>creative direction</li>
-                <li>on-site support</li>
-              </ul>
+          {/* Two-column layout */}
+          <div className="section-2-split">
+            {/* Left side - Text */}
+            <div className="section-2-left-text">
+              <h2 className="section-2-left-title">Do Not Disturb — We're Working</h2>
             </div>
 
-            {/* Curved line in the middle */}
-            {/* <div className="section-2-curve">
-              <Image
-                src="/images/section2/curveline.png"
-                alt=""
-                width={10}
-                height={300}
-                className="curve-line"
-                unoptimized
-              />
-            </div> */}
+            {/* Right side - Service lists */}
+            <div className="section-2-right-services">
+              {/* Title */}
+              <h2 className="section-2-title">CORE SERVICES</h2>
 
-            {/* Right side - FOR HOTELS */}
-            <div className="section-2-right">
-              <h3 className="section-2-subtitle">FOR HOTELS</h3>
-              <ul className="section-2-list">
-                <li>CONTENT</li>
-                <li>CAMPAIGNS</li>
-                <li>INFLUENCER MARKETING</li>
-                <li>BRAND CONCIERGE</li>
-              </ul>
+              {/* Content - stacked vertically */}
+              <div className="section-2-content">
+                {/* FOR BRANDS */}
+                <div className="section-2-left">
+                  <h3 className="section-2-subtitle">FOR BRANDS</h3>
+                  <ul className="section-2-list">
+                    <li>Fora Travel + logistics</li>
+                    <li>content-driven itineraries</li>
+                    <li>creative direction</li>
+                    <li>on-site support</li>
+                  </ul>
+                </div>
+
+                {/* FOR HOTELS */}
+                <div className="section-2-right">
+                  <h3 className="section-2-subtitle">FOR HOTELS</h3>
+                  <ul className="section-2-list">
+                    <li>CONTENT</li>
+                    <li>CAMPAIGNS</li>
+                    <li>INFLUENCER MARKETING</li>
+                    <li>BRAND CONCIERGE</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Learn More Button */}
+          {/* Learn More Button - centered below */}
           <motion.div
             className="section-2-button-container"
             initial={{ opacity: 1, y: 0 }}
@@ -739,14 +738,8 @@ export default function ComingSoon() {
       {/* Section 3 */}
       <section className="scroll-snap-section section-3-split">
         <div className="section-3-container">
-          {/* Left side - 65% */}
-          <motion.div
-            className="section-3-left"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
+          {/* Left side - Title */}
+          <div className="section-3-left">
             <h2 className="section-3-title">
               <span>12 YEARS</span>
               <span>IN</span>
@@ -756,21 +749,10 @@ export default function ComingSoon() {
               trusted by over 50<br />
               global agencies & top brands
             </h3>
-          </motion.div>
+          </div>
 
-          {/* Right side - 35% */}
-          <motion.div
-            className="section-3-right"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Blank for now */}
-          </motion.div>
-          
-          {/* Credits container - bottom left */}
-          <div className="section-3-credits-container">
+          {/* Right side - Credits list */}
+          <div className="section-3-right">
             <div className="section-3-credits">
               <div className="credits-item">Classpass</div>
               <div className="credits-item">eBay Luxury Watches</div>
@@ -797,231 +779,7 @@ export default function ComingSoon() {
               <div className="credits-item">Cadillac</div>
               <div className="credits-item">Krispy Kreme</div>
               <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
+              
             </div>
           </div>
         </div>
