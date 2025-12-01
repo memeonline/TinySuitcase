@@ -684,7 +684,7 @@ export default function ComingSoon() {
           <div className="section-2-split">
             {/* Left side - Text */}
             <div className="section-2-left-text">
-              <h2 className="section-2-left-title">Do Not Disturb — We're Working</h2>
+              <h2 className="section-2-left-title">Do Not Disturb — We&apos;re Working</h2>
             </div>
 
             {/* Right side - Service lists */}
