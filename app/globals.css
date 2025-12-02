@@ -31,6 +31,9 @@ html {
   height: 100%;
   overflow: hidden;
   scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -839,7 +842,7 @@ main {
 
 .section-2-title {
   font-family: 'TG Girthy Ultra', sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #D7CBBA;
   text-align: center;
@@ -851,7 +854,7 @@ main {
 
 @media (min-width: 768px) {
   .section-2-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -878,7 +881,7 @@ main {
 
 .section-2-subtitle {
   font-family: 'TG Girthy Ultra', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: #D7CBBA;
   text-transform: uppercase;
@@ -900,7 +903,7 @@ main {
 
 .section-2-list li {
   font-family: 'Reddit Mono', monospace;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #D7CBBA;
   position: relative;
   padding-left: 1.25rem;
@@ -918,7 +921,7 @@ main {
 
 @media (min-width: 768px) {
   .section-2-list li {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
 }
 
@@ -929,7 +932,7 @@ main {
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 2rem;
+  margin-top: -1rem;
   padding: 0;
 }
 
