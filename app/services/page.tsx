@@ -3,8 +3,51 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 export default function Services() {
+  // Track when sections are in view to change menu color
+  useEffect(() => {
+    const handleScroll = () => {
+      const section1 = document.querySelector('.services-section-1')
+      const section2 = document.querySelector('.services-section-2')
+      const nav = document.querySelector('.nav')
+      if (nav) {
+        let section2InView = false
+        let section1InView = false
+        
+        if (section1) {
+          const rect1 = section1.getBoundingClientRect()
+          section1InView = rect1.top <= 100 && rect1.bottom >= 100
+        }
+        
+        if (section2) {
+          const rect2 = section2.getBoundingClientRect()
+          section2InView = rect2.top <= 100 && rect2.bottom >= 100
+        }
+        
+        // Remove all menu color classes first
+        nav.classList.remove('nav-services-section-1', 'nav-services-section-2')
+        
+        // Add appropriate class - section 2 takes priority if both are in view
+        if (section2InView) {
+          nav.classList.add('nav-services-section-2')
+        } else if (section1InView) {
+          nav.classList.add('nav-services-section-1')
+        } else {
+          // Default to section 1 (beige) if at top of page
+          nav.classList.add('nav-services-section-1')
+        }
+      }
+    }
+
+    const main = document.querySelector('main')
+    if (main) {
+      main.addEventListener('scroll', handleScroll)
+      handleScroll() // Check on mount
+      return () => main.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   const menuItems = [
     { label: 'About', href: '/about' },
     { label: 'Services', href: '/services' },
@@ -12,7 +55,7 @@ export default function Services() {
   ]
 
   return (
-    <main className="main-container">
+    <main>
       {/* Navigation Menu */}
       <nav className="nav">
         <div className="nav-container">
@@ -62,29 +105,98 @@ export default function Services() {
         </div>
       </nav>
 
-      <div className="content-wrapper">
-        <div className="content-container-simple">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="page-title">Services</h1>
-            <p className="body-text">Coming soon...</p>
-          </motion.div>
-        </div>
-      </div>
+      {/* Section 1 - Brand Services */}
+      <section className="scroll-snap-section services-section-1">
+        <div className="services-page-wrapper">
+          <div className="services-page-split">
+            {/* Left Side - 40% */}
+            <div className="services-page-left">
+              <h1 className="services-page-title">BRAND SERVICES</h1>
+            </div>
 
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.2 }}
-        className="footer"
-      >
-        <p className="footer-text">
-          © {new Date().getFullYear()} Tiny Suitcase. All rights reserved.
-        </p>
-      </motion.footer>
+            {/* Right Side - 60% */}
+            <div className="services-page-right">
+              <div className="services-content">
+                <div className="services-item">
+                  <h2 className="services-item-title">FORA TRAVEL + LOGISTICS</h2>
+                  <p className="services-item-text">
+                    Location scouting & booking, access to aesthetic boutique hotels, concierge services, and VIP upgrades (comped breakfasts, spa credits, etc.).
+                  </p>
+                </div>
+
+                <div className="services-item">
+                  <h2 className="services-item-title">CONTENT-DRIVEN ITINERARIES</h2>
+                  <p className="services-item-text">
+                    Content strategy created before the trip and on-brand storytelling moments built throughout the schedule.
+                  </p>
+                </div>
+
+                <div className="services-item">
+                  <h2 className="services-item-title">CREATIVE DIRECTION</h2>
+                  <p className="services-item-text">
+                    Moodboards, shot lists, and copy & messaging guides for influencers and brands.
+                  </p>
+                </div>
+
+                <div className="services-item">
+                  <h2 className="services-item-title">CAMPAIGN DEVELOPMENT</h2>
+                  <p className="services-item-text">
+                    Backed by 12+ years of advertising experience, we help develop full-scale campaigns to fit any brief.
+                  </p>
+                </div>
+
+                <div className="services-item">
+                  <h2 className="services-item-title">ON-SITE SUPPORT</h2>
+                  <p className="services-item-text">
+                    Content capture, art direction, styling, and video—tailored for brand editorials, evergreen content, or whatever you need.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2 - For Hotels */}
+      <section className="scroll-snap-section services-section-2">
+        <div className="services-section-2-wrapper">
+          <div className="services-section-2-container">
+            {/* Title on top */}
+            <h1 className="services-section-2-title">FOR HOTELS</h1>
+
+            {/* Content below */}
+            <div className="services-content services-section-2-content">
+              <div className="services-item">
+                <h2 className="services-item-title services-section-2-item-title">CONTENT DEVELOPMENT</h2>
+                <p className="services-item-text services-section-2-item-text">
+                  We step into your guest experience to capture its essence and translate it into a curated content library and storytelling strategy designed to move travelers to book.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-title services-section-2-item-title">INFLUENCER MARKETING</h2>
+                <p className="services-item-text services-section-2-item-text">
+                  As early adopters in influencer marketing, we know the industry inside out. We curate talent, develop clear creative direction and briefs, and manage partnerships to deliver high-quality content.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-title services-section-2-item-title">BRAND AMBASSADORS</h2>
+                <p className="services-item-text services-section-2-item-text">
+                  For long-term influencer partnerships, we tap our vetted talent network to build relationships with creators who embody your brand&apos;s values and aesthetic. They become an extension of your brand, amplifying your message and delivering ongoing UGC year-round.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-title services-section-2-item-title">BRAND CONCIERGE (coming soon)</h2>
+                <p className="services-item-text services-section-2-item-text">
+                  Launching in 2026, we transform hotels into spaces of discovery, curating and styling partner brands tailored to each property. Hotels gain new revenue streams, brands connect with a captive audience. Every touchpoint is intentional, photo-worthy, and content-ready.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

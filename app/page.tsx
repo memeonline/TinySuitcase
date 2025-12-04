@@ -706,13 +706,14 @@ export default function ComingSoon() {
             {/* Right side */}
             <div className="section-2-right">
               {/* Title */}
-              <h2 className="section-2-title">CORE SERVICES</h2>
 
               {/* Content - stacked vertically */}
               <div className="section-2-content">
                 {/* FOR BRANDS */}
                 <div className="section-2-brand-list">
-                  <h3 className="section-2-subtitle">FOR BRANDS</h3>
+                <h3 className="section-2-subtitle">CORE SERVICES</h3>
+                <br />
+                  <h3 className="section-2-subtitle-small">FOR BRANDS</h3>
                   <ul className="section-2-list">
                     <li>Fora Travel + logistics</li>
                     <li>content-driven itineraries</li>
@@ -723,7 +724,7 @@ export default function ComingSoon() {
 
                 {/* FOR HOTELS */}
                 <div className="section-2-hotel-list">
-                  <h3 className="section-2-subtitle">FOR HOTELS</h3>
+                  <h3 className="section-2-subtitle-small">FOR HOTELS</h3>
                   <ul className="section-2-list">
                     <li>CONTENT</li>
                     <li>CAMPAIGNS</li>

@@ -238,6 +238,19 @@ main {
   background-color: #D7CBBA;
 }
 
+/* Menu text on services section 1 (beige) */
+.nav-services-section-1 .menu-link {
+  color: #D7CBBA;
+}
+
+.nav-services-section-1 .home-link-in-menu button {
+  color: #D7CBBA;
+}
+
+.nav-services-section-1 .menu-underline {
+  background-color: #D7CBBA;
+}
+
 /* White menu text in section 3 */
 .nav-white .menu-link {
   color: white;
@@ -891,10 +904,22 @@ main {
   width: 100%;
 }
 
+.section-2-subtitle-small {
+  font-family: 'Reddit Mono', monospace;
+  font-size: 1rem;
+  font-weight: regular;
+  color: #D7CBBA;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
 .section-2-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 0rem 0rem 0rem 0rem;
+  margin: 0rem 0rem 0rem 0rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -915,8 +940,10 @@ main {
   content: '•';
   position: absolute;
   left: 0;
+  top: -0.2em;
   color: #D7CBBA;
   font-size: 1.2rem;
+  line-height: inherit;
 }
 
 @media (min-width: 768px) {
@@ -1225,6 +1252,226 @@ main {
     transform: none;
   }
 
+}
+
+/* Services Page Styles */
+.services-section-1 {
+  background-color: #1C0902;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+.services-section-2 {
+  background-color: white;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+.services-page-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 4rem 2rem;
+}
+
+.services-page-split {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 4rem;
+  padding: 0;
+}
+
+.services-page-left {
+  flex: 0 0 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem;
+}
+
+.services-page-title {
+  font-family: 'TG Girthy Ultra', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #D7CBBA;
+  text-align: left;
+  letter-spacing: 0.1em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .services-page-title {
+    font-size: 3.5rem;
+  }
+}
+
+.services-page-right {
+  flex: 0 0 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.services-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.services-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.services-item-title {
+  font-family: 'Reddit Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #D7CBBA;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .services-item-title {
+    font-size: 1.5rem;
+  }
+}
+
+.services-item-text {
+  font-family: 'Reddit Mono', monospace;
+  font-size: 0.875rem;
+  color: #D7CBBA;
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .services-item-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-page-wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .services-page-split {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .services-page-left {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .services-page-right {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .services-page-title {
+    text-align: center;
+  }
+
+  .services-content {
+    gap: 1.5rem;
+  }
+}
+
+/* Services Section 2 - White Background */
+.services-section-2-wrapper {
+  background-color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+
+.services-section-2-container {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.services-section-2-title {
+  font-family: 'TG Girthy Ultra', sans-serif;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .services-section-2-title {
+    font-size: 2.5rem;
+  }
+}
+
+.services-section-2-content {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.services-section-2-item-title {
+  color: black;
+}
+
+.services-section-2-item-text {
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .services-section-2-wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .services-section-2-container {
+    gap: 2rem;
+  }
+
+  .services-section-2-title {
+    font-size: 1.5rem;
+  }
+
+  .services-section-2-content {
+    max-width: 100%;
+  }
+}
+
+/* Black menu on services section 2 */
+.nav-services-section-2 .menu-link {
+  color: black;
+}
+
+.nav-services-section-2 .home-link-in-menu button {
+  color: black;
+}
+
+.nav-services-section-2 .menu-underline {
+  background-color: black;
 }
 
 
