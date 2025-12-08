@@ -3,7 +3,22 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import Script from 'next/script'
+
+// Type declaration for custom web component
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'hotfx-split-flap': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+        height?: string;
+        width?: string;
+        duration?: string;
+        characters?: string;
+      }, HTMLElement>;
+    }
+  }
+}
 
 export default function About() {
   const menuItems = [
@@ -13,6 +28,51 @@ export default function About() {
   ]
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const splitFlapContainerRef = useRef<HTMLDivElement | null>(null)
+  const splitFlapContainerRefEmpty = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const novels = [
+      '      LOS ANGELES',
+      '     NEW YORK CITY',
+      '      MEXICO CITY',
+    ]
+    let currentIndex = 3
+
+    const interval = setInterval(() => {
+      const element = splitFlapContainerRef.current?.querySelector('hotfx-split-flap') as HTMLElement
+      if (element) {
+        currentIndex = currentIndex >= novels.length - 1 ? 0 : currentIndex + 1
+        element.textContent = novels[currentIndex]
+      }
+    }, 8000)
+
+    return () => clearInterval(interval)
+
+
+
+  }, [])
+
+  
+  useEffect(() => {
+    const novels = [
+      '',
+    ]
+    let currentIndex = 10
+
+    const interval = setInterval(() => {
+      const element = splitFlapContainerRefEmpty.current?.querySelector('hotfx-split-flap') as HTMLElement
+      if (element) {
+        currentIndex = currentIndex >= novels.length - 1 ? 0 : currentIndex + 1
+        element.textContent = novels[currentIndex]
+      }
+    }, 8000)
+
+    return () => clearInterval(interval)
+
+
+
+  }, [])
 
   return (
     <main>
@@ -137,7 +197,7 @@ export default function About() {
           >
             <h2 className="about-section-title">Our Mission</h2>
             <p className="about-section-text">
-              We design brand experiences that feel personal, thoughtful, and authentic, whether that's a social-first campaign, an editorial-style shoot, or an amenity kit waiting inside a guest room, our goal is always the same: to cultivate community and connection that lasts far beyond checkout.
+              We design brand experiences that feel personal, thoughtful, and authentic, whether that&apos;s a social-first campaign, an editorial-style shoot, or an amenity kit waiting inside a guest room, our goal is always the same: to cultivate community and connection that lasts far beyond checkout.
             </p>
           </motion.div>
         </div>
@@ -178,6 +238,47 @@ export default function About() {
           </motion.div>
         </div>
       </section>
+
+      {/* Section 4 - Split Flap Display */}
+      <section className="scroll-snap-section about-section-4">
+        <div className="about-section-container-flip" >
+          <motion.div
+            className="about-content"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            <div id="hot-0bf6g" style={{ marginBottom: '-0.1rem' }} ref={splitFlapContainerRefEmpty}>
+              <hotfx-split-flap height="1" width="23" duration="10">
+                
+              </hotfx-split-flap>
+              </div>
+            <div id="hot-0bf6e" style={{ marginTop: '0rem' }}>
+              <hotfx-split-flap height="2" width="23" duration="100">
+              &nbsp;TINY SUITCASE STUDIOS
+              </hotfx-split-flap>
+              </div>
+              <div id="hot-0bf6f" style={{ marginTop: '.1rem' }}>
+              <hotfx-split-flap height="2" width="23" duration="100">
+              &nbsp;&nbsp;&nbsp;&nbsp;OPERATING&nbsp;&nbsp;FROM
+              </hotfx-split-flap>
+            </div>
+            <div id="hot-novels" style={{ marginTop: '.1rem' }} ref={splitFlapContainerRef}>
+              <hotfx-split-flap height="2" width="23" duration="100" >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MEXICO CITY
+              </hotfx-split-flap>
+            </div>
+
+          </motion.div>
+        </div>
+      </section>
+
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@hot-page/hotfx-split-flap"
+        strategy="afterInteractive"
+        type="module"
+      />
     </main>
   )
 }

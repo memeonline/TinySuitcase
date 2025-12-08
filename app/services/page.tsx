@@ -228,29 +228,25 @@ export default function Services() {
                 <div className="services-item">
                   <h2 className="services-item-title">CONTENT DEVELOPMENT</h2>
                   <p className="services-item-text">
-                    We step into your guest experience to capture its essence and translate it into a curated content library and storytelling strategy designed to move travelers to book.
-                  </p>
+                  Capture your guest experience and turn it into a curated content library and storytelling strategy that drives bookings.</p>
                 </div>
 
                 <div className="services-item">
                   <h2 className="services-item-title">INFLUENCER MARKETING</h2>
                   <p className="services-item-text">
-                    As early adopters in influencer marketing, we know the industry inside out. We curate talent, develop clear creative direction and briefs, and manage partnerships to deliver high-quality content.
-                  </p>
+                  As early adopters in the space, we curate talent, build clear creative direction, and manage partnerships to deliver high-impact content.</p>
                 </div>
 
                 <div className="services-item">
                   <h2 className="services-item-title">BRAND AMBASSADORS</h2>
                   <p className="services-item-text">
-                    For long-term influencer partnerships, we tap our vetted talent network to build relationships with creators who embody your brand&apos;s values and aesthetic. They become an extension of your brand, amplifying your message and delivering ongoing UGC year-round.
-                  </p>
+                  We match you with vetted creators who embody your brand, amplifying your message and delivering ongoing UGC year-round.</p>
                 </div>
 
                 <div className="services-item">
                   <h2 className="services-item-title">BRAND CONCIERGE (coming soon)</h2>
                   <p className="services-item-text">
-                    Launching in 2026, we transform hotels into spaces of discovery, curating and styling partner brands tailored to each property. Hotels gain new revenue streams, brands connect with a captive audience. Every touchpoint is intentional, photo-worthy, and content-ready.
-                  </p>
+                  Launching in 2026, we curate and style partner brands inside hotels—creating new revenue streams and photo-ready guest experiences.</p>
                 </div>
               </div>
             </div>
