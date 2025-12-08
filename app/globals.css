@@ -1433,10 +1433,11 @@ main {
   padding: 1rem 0 1rem 0;
 }
 .about-section-container-flip {
-  width: 43%;
-  margin: 0;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
   background-color: rgb(59, 59, 59);
-  padding: 1rem 0 1rem 0;
+  padding: 1rem 1rem 1rem 1rem;
 }
 
 .about-content {
@@ -1499,10 +1500,17 @@ hotfx-split-flap {
 }
 
 #hot-0bf6e,
-#hot-novels {
+#hot-novels,
+#hot-0bf6f,
+#hot-0bf6g {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+#hot-0bf6e,
+#hot-novels {
   margin-top: 5em;
 }
 
