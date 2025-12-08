@@ -1,8 +1,9 @@
 // Work Page - /work route
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function Work() {
   const menuItems = [
@@ -10,6 +11,8 @@ export default function Work() {
     { label: 'Services', href: '/services' },
     { label: 'Work', href: '/work' },
   ]
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
     <main className="main-container">
@@ -26,7 +29,7 @@ export default function Work() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="/" className="menu-link" style={{ fontFamily: "'TG Girthy Ultra', sans-serif", fontWeight: 'bold', fontSize: '0.875rem', letterSpacing: '0.03em' }}>
+              <Link href="/" className="menu-link" style={{ fontFamily: "'TG Girthy Ultra', sans-serif", fontWeight: 'bold', fontSize: '1rem', letterSpacing: '0.1em' }}>
                 TINY SUITCASE
                 <motion.span
                   className="menu-underline"
@@ -36,7 +39,7 @@ export default function Work() {
               </Link>
             </motion.div>
 
-            {/* Centered menu items container */}
+            {/* Centered menu items container - hidden on mobile */}
             <div className="nav-menu-items-centered">
               {menuItems.map((item, index) => (
             <motion.div
@@ -58,8 +61,68 @@ export default function Work() {
             </motion.div>
           ))}
             </div>
+
+              {/* Hamburger Menu Button - visible only on mobile */}
+              <button
+                className="hamburger-menu-button"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+              </button>
           </div>
         </div>
+
+          {/* Mobile Menu Overlay */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                className="mobile-menu-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <motion.div
+                  className="mobile-menu-content"
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    className="mobile-menu-close"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label="Close menu"
+                  >
+                    ×
+                  </button>
+                  <div className="mobile-menu-items">
+                    {menuItems.map((item, index) => (
+                      <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
+                        <Link 
+                          href={item.href} 
+                          className="mobile-menu-link"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
       </nav>
 
       <div className="content-wrapper">

@@ -1,11 +1,12 @@
 // Services Page - /services route
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Services() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   // Track when sections are in view to change menu color
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +70,7 @@ export default function Services() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="/" className="menu-link" style={{ fontFamily: "'TG Girthy Ultra', sans-serif", fontWeight: 'bold', fontSize: '0.875rem', letterSpacing: '0.03em' }}>
+              <Link href="/" className="menu-link" style={{ fontFamily: "'TG Girthy Ultra', sans-serif", fontWeight: 'bold', fontSize: '1rem', letterSpacing: '0.1em' }}>
                 TINY SUITCASE
                 <motion.span
                   className="menu-underline"
@@ -79,7 +80,7 @@ export default function Services() {
               </Link>
             </motion.div>
 
-            {/* Centered menu items container */}
+            {/* Centered menu items container - hidden on mobile */}
             <div className="nav-menu-items-centered">
               {menuItems.map((item, index) => (
             <motion.div
@@ -101,8 +102,68 @@ export default function Services() {
             </motion.div>
           ))}
             </div>
+
+              {/* Hamburger Menu Button - visible only on mobile */}
+              <button
+                className="hamburger-menu-button"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+              </button>
           </div>
         </div>
+
+          {/* Mobile Menu Overlay */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                className="mobile-menu-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <motion.div
+                  className="mobile-menu-content"
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    className="mobile-menu-close"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label="Close menu"
+                  >
+                    ×
+                  </button>
+                  <div className="mobile-menu-items">
+                    {menuItems.map((item, index) => (
+                      <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
+                        <Link 
+                          href={item.href} 
+                          className="mobile-menu-link"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
       </nav>
 
       {/* Section 1 - Brand Services */}
@@ -111,14 +172,14 @@ export default function Services() {
           <div className="services-page-split">
             {/* Left Side - 40% */}
             <div className="services-page-left">
-              <h1 className="services-page-title">BRAND SERVICES</h1>
+              <h1 className="services-page-title">BRAND <br></br>SERVICES</h1>
             </div>
 
             {/* Right Side - 60% */}
             <div className="services-page-right">
               <div className="services-content">
                 <div className="services-item">
-                  <h2 className="services-item-title">FORA TRAVEL + LOGISTICS</h2>
+                  <h2 className="services-item-title">FORA TRAVEL LOGISTICS</h2>
                   <p className="services-item-text">
                     Location scouting & booking, access to aesthetic boutique hotels, concierge services, and VIP upgrades (comped breakfasts, spa credits, etc.).
                   </p>
@@ -159,40 +220,44 @@ export default function Services() {
 
       {/* Section 2 - For Hotels */}
       <section className="scroll-snap-section services-section-2">
-        <div className="services-section-2-wrapper">
-          <div className="services-section-2-container">
-            {/* Title on top */}
-            <h1 className="services-section-2-title">FOR HOTELS</h1>
+        <div className="services-page-wrapper">
+          <div className="services-page-split">
+            {/* Left Side - 60% */}
+            <div className="services-page-right">
+              <div className="services-content">
+                <div className="services-item">
+                  <h2 className="services-item-title">CONTENT DEVELOPMENT</h2>
+                  <p className="services-item-text">
+                    We step into your guest experience to capture its essence and translate it into a curated content library and storytelling strategy designed to move travelers to book.
+                  </p>
+                </div>
 
-            {/* Content below */}
-            <div className="services-content services-section-2-content">
-              <div className="services-item">
-                <h2 className="services-item-title services-section-2-item-title">CONTENT DEVELOPMENT</h2>
-                <p className="services-item-text services-section-2-item-text">
-                  We step into your guest experience to capture its essence and translate it into a curated content library and storytelling strategy designed to move travelers to book.
-                </p>
-              </div>
+                <div className="services-item">
+                  <h2 className="services-item-title">INFLUENCER MARKETING</h2>
+                  <p className="services-item-text">
+                    As early adopters in influencer marketing, we know the industry inside out. We curate talent, develop clear creative direction and briefs, and manage partnerships to deliver high-quality content.
+                  </p>
+                </div>
 
-              <div className="services-item">
-                <h2 className="services-item-title services-section-2-item-title">INFLUENCER MARKETING</h2>
-                <p className="services-item-text services-section-2-item-text">
-                  As early adopters in influencer marketing, we know the industry inside out. We curate talent, develop clear creative direction and briefs, and manage partnerships to deliver high-quality content.
-                </p>
-              </div>
+                <div className="services-item">
+                  <h2 className="services-item-title">BRAND AMBASSADORS</h2>
+                  <p className="services-item-text">
+                    For long-term influencer partnerships, we tap our vetted talent network to build relationships with creators who embody your brand&apos;s values and aesthetic. They become an extension of your brand, amplifying your message and delivering ongoing UGC year-round.
+                  </p>
+                </div>
 
-              <div className="services-item">
-                <h2 className="services-item-title services-section-2-item-title">BRAND AMBASSADORS</h2>
-                <p className="services-item-text services-section-2-item-text">
-                  For long-term influencer partnerships, we tap our vetted talent network to build relationships with creators who embody your brand&apos;s values and aesthetic. They become an extension of your brand, amplifying your message and delivering ongoing UGC year-round.
-                </p>
+                <div className="services-item">
+                  <h2 className="services-item-title">BRAND CONCIERGE (coming soon)</h2>
+                  <p className="services-item-text">
+                    Launching in 2026, we transform hotels into spaces of discovery, curating and styling partner brands tailored to each property. Hotels gain new revenue streams, brands connect with a captive audience. Every touchpoint is intentional, photo-worthy, and content-ready.
+                  </p>
+                </div>
               </div>
+            </div>
 
-              <div className="services-item">
-                <h2 className="services-item-title services-section-2-item-title">BRAND CONCIERGE (coming soon)</h2>
-                <p className="services-item-text services-section-2-item-text">
-                  Launching in 2026, we transform hotels into spaces of discovery, curating and styling partner brands tailored to each property. Hotels gain new revenue streams, brands connect with a captive audience. Every touchpoint is intentional, photo-worthy, and content-ready.
-                </p>
-              </div>
+            {/* Right Side - 30% */}
+            <div className="services-page-left">
+              <h1 className="services-page-title">HOTELS<br></br>SERVICES</h1>
             </div>
           </div>
         </div>

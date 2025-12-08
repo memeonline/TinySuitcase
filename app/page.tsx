@@ -488,6 +488,7 @@ export default function ComingSoon() {
 
   const [showHomeLink, setShowHomeLink] = useState(false)
   const [showCalendlyOverlay, setShowCalendlyOverlay] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Track scroll position to show/hide home link
   useEffect(() => {
@@ -587,8 +588,8 @@ export default function ComingSoon() {
                         cursor: 'pointer', 
                         fontFamily: "'TG Girthy Ultra', sans-serif", 
                         fontWeight: 'bold', 
-                        fontSize: '0.875rem', 
-                        letterSpacing: '0.03em',
+                        fontSize: '1rem', 
+                        letterSpacing: '0.1em',
                         pointerEvents: 'auto',
                         position: 'relative',
                         zIndex: 103
@@ -605,7 +606,7 @@ export default function ComingSoon() {
                 )}
               </AnimatePresence>
 
-              {/* Centered menu items container */}
+              {/* Centered menu items container - hidden on mobile */}
               <div className="nav-menu-items-centered">
                 {menuItems.map((item, index) => (
                   <motion.div
@@ -627,8 +628,68 @@ export default function ComingSoon() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Hamburger Menu Button - visible only on mobile */}
+              <button
+                className="hamburger-menu-button"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+              </button>
             </div>
           </div>
+
+          {/* Mobile Menu Overlay */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                className="mobile-menu-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <motion.div
+                  className="mobile-menu-content"
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    className="mobile-menu-close"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label="Close menu"
+                  >
+                    ×
+                  </button>
+                  <div className="mobile-menu-items">
+                    {menuItems.map((item, index) => (
+                      <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
+                        <Link 
+                          href={item.href} 
+                          className="mobile-menu-link"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
 
         <div className="content-wrapper content-wrapper-layout">
@@ -641,16 +702,18 @@ export default function ComingSoon() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="main-title">
-                <span>TINY</span>
-                <Image
-                  src="/images/HS_Drawing.gif"
-                  alt=""
-                  width={250}
-                  height={250}
-                  className="title-gif"
-                  unoptimized
-                />
-                <span>SUITCASE</span>
+                <div className="main-title-top">
+                  <span>TINY</span>
+                  <Image
+                    src="/images/HS_Drawing.gif"
+                    alt=""
+                    width={250}
+                    height={250}
+                    className="title-gif"
+                    unoptimized
+                  />
+                </div>
+                <span className="main-title-bottom">SUITCASE</span>
               </h1>
             </motion.div>
 
@@ -712,24 +775,24 @@ export default function ComingSoon() {
                 {/* FOR BRANDS */}
                 <div className="section-2-brand-list">
                 <h3 className="section-2-subtitle">CORE SERVICES</h3>
-                <br />
-                  <h3 className="section-2-subtitle-small">FOR BRANDS</h3>
                   <ul className="section-2-list">
-                    <li>Fora Travel + logistics</li>
-                    <li>content-driven itineraries</li>
-                    <li>creative direction</li>
-                    <li>on-site support</li>
+                    <li>FOR BRANDS</li>
+                    <li>Fora + Logistics</li>
+                    <li>Content-Driven Itineraries</li>
+                    <li>Creative Direction</li>
+                    <li>On-Site Support</li>
                   </ul>
                 </div>
 
                 {/* FOR HOTELS */}
                 <div className="section-2-hotel-list">
-                  <h3 className="section-2-subtitle-small">FOR HOTELS</h3>
+                 
                   <ul className="section-2-list">
-                    <li>CONTENT</li>
-                    <li>CAMPAIGNS</li>
-                    <li>INFLUENCER MARKETING</li>
-                    <li>BRAND CONCIERGE</li>
+                    <li>FOR HOTELS</li>
+                    <li>Content</li>
+                    <li>Campaign</li>
+                    <li>Influencer Marketing</li>
+                    <li>Brand Concierge</li>
                   </ul>
                 </div>
               </div>
@@ -755,70 +818,67 @@ export default function ComingSoon() {
       {/* Section 3 */}
       <section className="scroll-snap-section section-3-split">
         <div className="section-3-container">
-          {/* Left side - Title */}
-          <div className="section-3-left">
-            <h2 className="section-3-title">
-              <span>12 YEARS</span>
-              <span>IN</span>
-              <span>ADVERTISING</span>
-            </h2>
-            <h3 className="section-3-subtitle">
-              trusted by over 50<br />
-              global agencies & top brands
-            </h3>
-          </div>
+          <h2 className="section-3-title">
+            <span>12 YEARS</span>
+    
+            <span>IN ADVERTISING</span>
+          </h2>
+          <h3 className="section-3-subtitle">
+            trusted by over 50 global agencies & top brands
+          </h3>
+        </div>
+      </section>
 
-          {/* Right side - Credits list */}
-          <div className="section-3-right">
-            <div className="section-3-credits">
-              <div className="credits-item">Classpass</div>
-              <div className="credits-item">eBay Luxury Watches</div>
-              <div className="credits-item">TRESemmé</div>
-              <div className="credits-item">Love Beauty & Planet</div>
-              <div className="credits-item">Don Julio</div>
-              <div className="credits-item">Lululemon</div>
-              <div className="credits-item">Volvo</div>
-              <div className="credits-item">Project Runway</div>
-              <div className="credits-item">Clairol</div>
-              <div className="credits-item">ELLE</div>
-              <div className="credits-item">Gillette Venus</div>
-              <div className="credits-item">Olay</div>
-              <div className="credits-item">L&apos;Oreal</div>
-              <div className="credits-item">Clean & Clear</div>
-              <div className="credits-item">NYFW</div>
-              <div className="credits-item">Glosslab</div>
-              <div className="credits-item">Love Home & Planet</div>
-              <div className="credits-item">Ponds</div>
-              <div className="credits-item">Weight Watchers</div>
-              <div className="credits-item">St. Ives</div>
-              <div className="credits-item">Coca‑Cola Brands</div>
-              <div className="credits-item">Applebee&apos;s</div>
-              <div className="credits-item">Cadillac</div>
-              <div className="credits-item">Krispy Kreme</div>
-              <div className="credits-item">WeWork</div>
-              
-            </div>
+      {/* Section 4 - Brands */}
+      <section className="scroll-snap-section section-4-brands">
+        <div className="section-4-brands-container">
+          <div className="section-4-credits">
+            <div className="credits-item">Classpass</div>
+            <div className="credits-item">eBay Luxury Watches</div>
+            <div className="credits-item">TRESemmé</div>
+            <div className="credits-item">Love Beauty & Planet</div>
+            <div className="credits-item">Don Julio</div>
+            <div className="credits-item">Lululemon</div>
+            <div className="credits-item">Volvo</div>
+            <div className="credits-item">Project Runway</div>
+            <div className="credits-item">Clairol</div>
+            <div className="credits-item">ELLE</div>
+            <div className="credits-item">Gillette Venus</div>
+            <div className="credits-item">Olay</div>
+            <div className="credits-item">L&apos;Oreal</div>
+            <div className="credits-item">Clean & Clear</div>
+            <div className="credits-item">NYFW</div>
+            <div className="credits-item">Glosslab</div>
+            <div className="credits-item">Love Home & Planet</div>
+            <div className="credits-item">Ponds</div>
+            <div className="credits-item">Weight Watchers</div>
+            <div className="credits-item">St. Ives</div>
+            <div className="credits-item">Coca‑Cola Brands</div>
+            <div className="credits-item">Applebee&apos;s</div>
+            <div className="credits-item">Cadillac</div>
+            <div className="credits-item">Krispy Kreme</div>
+            <div className="credits-item">WeWork</div>
           </div>
         </div>
       </section>
 
-      {/* Section 4 */}
-      <section className="scroll-snap-section section-4-split">
-        <div className="section-4-container">
+      {/* Section 5 */}
+      <section className="scroll-snap-section section-5-split">
+        <div className="section-5-container">
           {/* Left side - Background image 65% */}
           <motion.div
-            className="section-4-left"
+            className="section-5-left"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <div className="section-4-image-wrapper">
+            <div className="section-5-image-wrapper">
               <Image
                 src="/images/section4/BackgroundSec4.png"
                 alt=""
                 fill
-                className="section-4-image"
+                className="section-5-image"
                 sizes="(min-width: 1024px) 65vw, 100vw"
                 priority={false}
               />
@@ -827,24 +887,24 @@ export default function ComingSoon() {
 
           {/* Middle - Title */}
           <motion.div
-            className="section-4-center"
+            className="section-5-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <h2 className="section-4-title">ready to get started?</h2>
+            <h2 className="section-5-title">ready to get started?</h2>
           </motion.div>
 
           {/* Right - Call to action */}
           <motion.div
-            className="section-4-right"
+            className="section-5-right"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="section-4-cta">WORK WITH US</span>
+            <span className="section-5-cta">WORK WITH US</span>
           </motion.div>
         </div>
       </section>
