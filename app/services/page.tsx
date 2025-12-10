@@ -169,50 +169,60 @@ export default function Services() {
       {/* Section 1 - Brand Services */}
       <section className="scroll-snap-section services-section-1">
         <div className="services-page-wrapper">
-          <div className="services-page-split">
-            {/* Left Side - 40% */}
-            <div className="services-page-left">
-              <h1 className="services-page-title">BRAND <br></br>SERVICES</h1>
+          <div className="services-section-container">
+            {/* Title on top left */}
+            <h1 className="services-section-title">BRAND SERVICES</h1>
+
+            {/* Content below */}
+            <div className="services-content">
+              <div className="services-item">
+                <h2 className="services-item-subtitle">FORA TRAVEL LOGISTICS</h2>
+                <p className="services-item-text">
+                  Location scouting & booking, access to aesthetic boutique hotels, concierge services, and VIP upgrades (comped breakfasts, spa credits, etc.).
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-subtitle">CONTENT-DRIVEN ITINERARIES</h2>
+                <p className="services-item-text">
+                  Content strategy created before the trip and on-brand storytelling moments built throughout the schedule.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-subtitle">CREATIVE DIRECTION</h2>
+                <p className="services-item-text">
+                  Moodboards, shot lists, and copy & messaging guides for influencers and brands.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-subtitle">Campaign Strategy & Creative Development</h2>
+                <p className="services-item-text">
+                  Backed by 12+ years of advertising experience, we help develop full-scale campaigns to fit any brief.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-subtitle">*ON-SITE SUPPORT</h2>
+                <p className="services-item-text">
+                  Content capture, art direction, styling, and video—tailored for brand editorials, evergreen content, or whatever you need.
+                </p>
+              </div>
             </div>
 
-            {/* Right Side - 60% */}
-            <div className="services-page-right">
-              <div className="services-content">
-                <div className="services-item">
-                  <h2 className="services-item-title">FORA TRAVEL LOGISTICS</h2>
-                  <p className="services-item-text">
-                    Location scouting & booking, access to aesthetic boutique hotels, concierge services, and VIP upgrades (comped breakfasts, spa credits, etc.).
-                  </p>
-                </div>
-
-                <div className="services-item">
-                  <h2 className="services-item-title">CONTENT-DRIVEN ITINERARIES</h2>
-                  <p className="services-item-text">
-                    Content strategy created before the trip and on-brand storytelling moments built throughout the schedule.
-                  </p>
-                </div>
-
-                <div className="services-item">
-                  <h2 className="services-item-title">CREATIVE DIRECTION</h2>
-                  <p className="services-item-text">
-                    Moodboards, shot lists, and copy & messaging guides for influencers and brands.
-                  </p>
-                </div>
-
-                <div className="services-item">
-                  <h2 className="services-item-title">CAMPAIGN DEVELOPMENT</h2>
-                  <p className="services-item-text">
-                    Backed by 12+ years of advertising experience, we help develop full-scale campaigns to fit any brief.
-                  </p>
-                </div>
-
-                <div className="services-item">
-                  <h2 className="services-item-title">ON-SITE SUPPORT</h2>
-                  <p className="services-item-text">
-                    Content capture, art direction, styling, and video—tailored for brand editorials, evergreen content, or whatever you need.
-                  </p>
-                </div>
-              </div>
+            {/* Navigation to Hotels */}
+            <div className="services-section-nav services-section-nav-down">
+              <button 
+                onClick={() => {
+                  const section2 = document.querySelector('.services-section-2')
+                  section2?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="services-nav-button"
+              >
+                <span className="services-nav-text">For Hotels</span>
+                <span className="services-nav-arrow">▼</span>
+              </button>
             </div>
           </div>
         </div>
@@ -220,40 +230,54 @@ export default function Services() {
 
       {/* Section 2 - For Hotels */}
       <section className="scroll-snap-section services-section-2">
-        <div className="services-page-wrapper">
-          <div className="services-page-split">
-            {/* Left Side - 60% */}
-            <div className="services-page-right">
-              <div className="services-content">
-                <div className="services-item">
-                  <h2 className="services-item-title">CONTENT DEVELOPMENT</h2>
-                  <p className="services-item-text">
-                  Capture your guest experience and turn it into a curated content library and storytelling strategy that drives bookings.</p>
-                </div>
-
-                <div className="services-item">
-                  <h2 className="services-item-title">INFLUENCER MARKETING</h2>
-                  <p className="services-item-text">
-                  As early adopters in the space, we curate talent, build clear creative direction, and manage partnerships to deliver high-impact content.</p>
-                </div>
-
-                <div className="services-item">
-                  <h2 className="services-item-title">BRAND AMBASSADORS</h2>
-                  <p className="services-item-text">
-                  We match you with vetted creators who embody your brand, amplifying your message and delivering ongoing UGC year-round.</p>
-                </div>
-
-                <div className="services-item">
-                  <h2 className="services-item-title">BRAND CONCIERGE (coming soon)</h2>
-                  <p className="services-item-text">
-                  Launching in 2026, we curate and style partner brands inside hotels—creating new revenue streams and photo-ready guest experiences.</p>
-                </div>
-              </div>
+        <div className="services-section-2-wrapper">
+          <div className="services-section-container">
+            {/* Navigation to Brands */}
+            <div className="services-section-nav services-section-nav-up">
+              <button 
+                onClick={() => {
+                  const section1 = document.querySelector('.services-section-1')
+                  section1?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="services-nav-button"
+              >
+                <span className="services-nav-text">For Brands</span>
+                <span className="services-nav-arrow">▲</span>
+              </button>
             </div>
 
-            {/* Right Side - 30% */}
-            <div className="services-page-left">
-              <h1 className="services-page-title">HOTELS<br></br>SERVICES</h1>
+            {/* Title on top left */}
+            <h1 className="services-section-title">FOR HOTELS</h1>
+
+            {/* Content below */}
+            <div className="services-content">
+              <div className="services-item">
+                <h2 className="services-item-subtitle">CONTENT DEVELOPMENT</h2>
+                <p className="services-item-text ">
+                  Capture your guest experience and turn it into a curated content library and storytelling strategy that drives bookings.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-subtitle ">INFLUENCER MARKETING</h2>
+                <p className="services-item-text">
+                  As early adopters in the space, we curate talent, build clear creative direction, and manage partnerships to deliver high-impact content.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-subtitle">BRAND AMBASSADORS</h2>
+                <p className="services-item-text">
+                  We match you with vetted creators who embody your brand, amplifying your message and delivering ongoing UGC year-round.
+                </p>
+              </div>
+
+              <div className="services-item">
+                <h2 className="services-item-subtitle">BRAND CONCIERGE (coming soon)</h2>
+                <p className="services-item-text">
+                  Launching in 2026, we curate and style partner brands inside hotels—creating new revenue streams and photo-ready guest experiences.
+                </p>
+              </div>
             </div>
           </div>
         </div>

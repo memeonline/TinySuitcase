@@ -193,7 +193,7 @@ main {
 
 @media (max-width: 767px) {
   .home-link-in-menu {
-    left: 2rem;
+    left: .1rem;
   }
 }
 
@@ -865,8 +865,8 @@ main {
 }
 
 .section-2-subtitle {
-  font-family: 'TG Girthy Ultra', sans-serif;
-  font-size: 1.25rem;
+  font-family: "Big Caslon", "Big Caslon Regular", serif;
+  font-size: 1rem;
   font-weight: bold;
   color: #D7CBBA;
   text-transform: uppercase;
@@ -1256,9 +1256,19 @@ main {
 }
 
 .services-section-2 {
-  background-color: var(--cream-bg);
+  background-color: white;
   min-height: 100vh;
   height: 100vh;
+}
+
+.services-section-2-wrapper {
+  background-color: #315645;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
 }
 
 .services-page-wrapper {
@@ -1271,92 +1281,75 @@ main {
   padding: 4rem 2rem;
 }
 
-.services-page-split {
+.services-section-container {
   width: 100%;
   max-width: 1400px;
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 4rem;
-  padding: 0;
-}
-
-.services-page-left {
-  flex: 0 0 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.services-page-title {
-  font-family: 'TG Girthy Ultra', sans-serif;
-  font-weight: bold;
-  color: #1C0902;
-  text-align: center;
-  letter-spacing: 0.1em;
-  margin: 0;
-  line-height: 1;
-}
-
-@media (min-width: 768px) {
-  .services-page-title {
-    font-size: 2.2rem;
-  }
-}
-
-.services-page-right {
-  flex: 0 0 60%;
-  display: flex;
   flex-direction: column;
+  gap: 3rem;
+  margin: 0 auto;
   justify-content: center;
 }
+
+.services-section-title {
+  font-family: 'TG Girthy Ultra', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: left;
+  margin: 0;
+  margin-bottom: 2rem;
+  padding-left: 3.8rem;
+}
+
 
 .services-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .services-item {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  text-align: center;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
 }
 
-.services-item-title {
-  font-family: 'TG Girthy Ultra', sans-serif;
-  font-weight: bold;
-  color: #1C0902;
+.services-item-subtitle {
+  font-family: "TG Girthy Ultra", sans-serif;
+  font-size: 1rem;
+  color: black;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin: 0;
   line-height: 1.4;
-  text-align: center;
-}
-
-@media (min-width: 768px) {
-  .services-item-title {
-    font-size: 1rem;
-  }
+  text-align: left;
+  flex: 0 0 30%;
+  max-width: 20%;
+  padding-left: 3.8rem;
+  padding-right: 3.8rem;
 }
 
 .services-item-text {
   font-family: "Big Caslon", "Big Caslon Regular", serif;
-  font-size: 0.875rem;
-  color: #1C0902;
-  line-height: 1.2;
+  font-size: 1.2rem;
+  color: black;
+  line-height: 1.4;
   margin: 0;
-  width: 70%;
-  text-align: center;
+  flex: 1;
+  text-align: left;
+  margin-left: 5rem;
 }
 
 @media (min-width: 768px) {
   .services-item-text {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -1365,44 +1358,122 @@ main {
     padding: 2rem 1rem;
   }
 
-  .services-page-split {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .services-page-left {
-    flex: 0 0 auto;
-    width: 100%;
-    padding: 1rem;
-  }
-
-  .services-page-right {
-    flex: 0 0 auto;
-    width: 100%;
-    padding: 1rem;
-  }
-
-  .services-page-title {
-    text-align: center;
+  .services-section-container {
+    gap: 1rem;
   }
 
   .services-content {
     gap: 1.5rem;
   }
+
+  .services-section-title {
+    font-size: 1.2rem;
+    padding-left: 0rem;
+  }
+
+  .services-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .services-item-subtitle {
+    flex: 0 0 auto;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .services-item-text {
+    flex: 0 0 auto;
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .services-nav-button{
+    display: none !important;
+  }
 }
 
-/* Brown menu on services section 2 */
+/* Menu on services section 2 */
 .nav-services-section-2 .menu-link {
-  color: #1C0902;
+  color: #DDD8D0;
 }
 
 .nav-services-section-2 .home-link-in-menu button {
-  color: #1C0902;
+  color: #DDD8D0;
 }
 
 .nav-services-section-2 .menu-underline {
-  background-color: #1C0902;
+  background-color: #DDD8D0;
 }
+
+.nav-services-section-2 .hamburger-line {
+  background-color: #DDD8D0;
+}
+
+/* Section 2 item styles */
+.services-section-2 .services-section-title,
+.services-section-2 .services-item-subtitle,
+.services-section-2 .services-item-text {
+  color: #DDD8D0;
+}
+
+/* Services Section Navigation */
+.services-section-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.services-section-nav-down {
+  margin-top: -1rem;
+}
+
+.services-section-nav-up {
+  margin-top: -12rem;
+  margin-bottom: 2rem;
+}
+
+.services-nav-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-family: 'Reddit Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s;
+}
+
+.services-nav-button:hover {
+  opacity: 0.7;
+}
+
+.services-nav-text {
+  font-size: 0.875rem;
+  color: inherit;
+}
+
+.services-section-1 .services-nav-text {
+  color: black;
+}
+
+.services-section-2 .services-nav-text,
+.services-section-2 .services-nav-arrow {
+  color: #DDD8D0;
+}
+
+.services-nav-arrow {
+  font-size: 1.5rem;
+  color: inherit;
+  line-height: 1;
+}
+
 
 /* About Page Styles */
 .about-section-1 {
