@@ -1333,7 +1333,7 @@ main {
   flex: 0 0 30%;
   max-width: 20%;
   padding-left: 3.8rem;
-  padding-right: 3.8rem;
+  
 }
 
 .services-item-text {
@@ -1345,6 +1345,7 @@ main {
   flex: 1;
   text-align: left;
   margin-left: 5rem;
+  padding-right: 3.8rem;
 }
 
 @media (min-width: 768px) {
