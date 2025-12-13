@@ -3,6 +3,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function Services() {
@@ -170,13 +171,9 @@ export default function Services() {
       <section className="scroll-snap-section services-section-1">
         <div className="services-page-wrapper">
           <div className="services-page-split">
-            {/* Left Side - 40% */}
+            {/* Left Side - Text */}
             <div className="services-page-left">
-              <h1 className="services-page-title">BRAND <br></br>SERVICES</h1>
-            </div>
-
-            {/* Right Side - 60% */}
-            <div className="services-page-right">
+              <h1 className="services-page-title">BRAND SERVICES</h1>
               <div className="services-content">
                 <div className="services-item">
                   <h2 className="services-item-title">FORA TRAVEL LOGISTICS</h2>
@@ -214,6 +211,17 @@ export default function Services() {
                 </div>
               </div>
             </div>
+
+            {/* Right Side - Image */}
+            <div className="services-page-right services-page-image">
+              <Image
+                src="/images/services/brand.png"
+                alt="Brand Services"
+                width={800}
+                height={1000}
+                className="services-image"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -222,8 +230,9 @@ export default function Services() {
       <section className="scroll-snap-section services-section-2">
         <div className="services-page-wrapper">
           <div className="services-page-split">
-            {/* Left Side - 60% */}
-            <div className="services-page-right">
+            {/* Left Side - Text */}
+            <div className="services-page-left">
+              <h1 className="services-page-title">HOTELS SERVICES</h1>
               <div className="services-content">
                 <div className="services-item">
                   <h2 className="services-item-title">CONTENT DEVELOPMENT</h2>
@@ -251,9 +260,15 @@ export default function Services() {
               </div>
             </div>
 
-            {/* Right Side - 30% */}
-            <div className="services-page-left">
-              <h1 className="services-page-title">HOTELS<br></br>SERVICES</h1>
+            {/* Right Side - Image */}
+            <div className="services-page-right services-page-image">
+              <Image
+                src="/images/services/hotel.png"
+                alt="Hotel Services"
+                width={800}
+                height={1000}
+                className="services-image"
+              />
             </div>
           </div>
         </div>

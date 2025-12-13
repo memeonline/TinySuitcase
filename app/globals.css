@@ -315,6 +315,10 @@ main {
   background-color: #1C0902;
 }
 
+.nav-services-section-2 .hamburger-line {
+  background-color: #DDD8D0;
+}
+
 .nav-white .hamburger-line {
   background-color: white;
 }
@@ -816,7 +820,7 @@ main {
 
 /* Left Side */
 .section-2-left {
-  flex: 0 0 55%;
+  flex: 0 0 45%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -831,10 +835,10 @@ main {
 
 /* Right Side */
 .section-2-right {
-  width: 100%;
+  flex: 0 0 55%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 2rem;
   padding: 2rem;
@@ -845,28 +849,27 @@ main {
 
 .section-2-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  width: 100%;
-  gap: 2rem;
+  width: auto;
+  gap: 0.75rem;
   padding: 2rem 0;
 }
 
 .section-2-brand-list,
 .section-2-hotel-list {
-  width: 100%;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 1.5rem;
-  padding-left: 30%;
+  padding-left: 0;
 }
 
 .section-2-subtitle {
   font-family: 'TG Girthy Ultra', sans-serif;
-  font-size: 1.25rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #D7CBBA;
   text-transform: uppercase;
@@ -875,6 +878,7 @@ main {
   text-align: left;
   width: 100%;
   letter-spacing: 0.2em;
+  text-align: center;
 }
 
 .section-2-subtitle-small {
@@ -885,8 +889,8 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin: 0;
-  text-align: left;
   width: 100%;
+  text-align: center;
 }
 
 .section-2-list {
@@ -895,9 +899,9 @@ main {
   margin: 0rem 0rem 0rem 0rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
+  gap: 1rem;
   letter-spacing: 0.1em;
+  max-width: 70%;
 }
 
 .section-2-list li {
@@ -910,12 +914,17 @@ main {
 }
 
 .section-2-list li:first-child {
+  font-family: 'TG Girthy Ultra', sans-serif;
   list-style: none;
   letter-spacing: 0.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 0.5em;
+  padding-bottom: 1em;
 }
 
 .section-2-list li:not(:first-child)::before {
-  content: '•';
+  content: '◆';
   position: absolute;
   left: 0;
   top: -0.2em;
@@ -951,9 +960,12 @@ main {
   cursor: pointer;
   width: auto;
   color: #D7CBBA;
-  border: none;
-  text-decoration: underline;
+  border: 2px solid #D7CBBA;
+  border-radius: 0;
+  text-decoration: none;
   font-size: 1rem;
+  margin-top: 50px;
+  padding: 8px 200px;
 }
 
 /* Mobile Styles */
@@ -975,6 +987,7 @@ main {
   }
 
   .section-2-content {
+    flex-direction: column;
     gap: 2rem;
     padding: 1rem 0;
   }
@@ -1256,7 +1269,7 @@ main {
 }
 
 .services-section-2 {
-  background-color: var(--cream-bg);
+  background-color: #0E271C;
   min-height: 100vh;
   height: 100vh;
 }
@@ -1282,21 +1295,24 @@ main {
 }
 
 .services-page-left {
-  flex: 0 0 30%;
+  flex: 0 0 55%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   padding: 2rem;
+  padding-bottom: 4rem;
 }
 
 .services-page-title {
   font-family: 'TG Girthy Ultra', sans-serif;
   font-weight: bold;
   color: #1C0902;
-  text-align: center;
+  text-align: left;
   letter-spacing: 0.1em;
   margin: 0;
   line-height: 1;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -1306,25 +1322,48 @@ main {
 }
 
 .services-page-right {
-  flex: 0 0 60%;
+  flex: 0 0 45%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 0;
+}
+
+.services-page-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  margin-left: 0rem;
+  margin-top: -4rem;
+}
+
+.services-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
 }
 
 .services-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  align-items: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 2rem;
 }
 
 .services-item {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
 }
 
 .services-item-title {
@@ -1334,8 +1373,9 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin: 0;
-  line-height: 1.4;
-  text-align: center;
+  line-height: 2;
+  text-align: left;
+  padding-bottom: 0rem;
 }
 
 @media (min-width: 768px) {
@@ -1350,8 +1390,8 @@ main {
   color: #1C0902;
   line-height: 1.2;
   margin: 0;
-  width: 70%;
-  text-align: center;
+  width: 100%;
+  text-align: left;
 }
 
 @media (min-width: 768px) {
@@ -1383,7 +1423,16 @@ main {
   }
 
   .services-page-title {
-    text-align: center;
+    text-align: left;
+  }
+  
+  .services-content {
+    align-items: flex-start;
+  }
+  
+  .services-item {
+    align-items: flex-start;
+    text-align: left;
   }
 
   .services-content {
@@ -1393,15 +1442,28 @@ main {
 
 /* Brown menu on services section 2 */
 .nav-services-section-2 .menu-link {
-  color: #1C0902;
+  color: #DDD8D0;
 }
 
 .nav-services-section-2 .home-link-in-menu button {
-  color: #1C0902;
+  color: #DDD8D0;
 }
 
 .nav-services-section-2 .menu-underline {
-  background-color: #1C0902;
+  background-color: #DDD8D0;
+}
+
+/* Hotel Section Text Colors */
+.services-section-2 .services-page-title {
+  color: #DDD8D0;
+}
+
+.services-section-2 .services-item-title {
+  color: #DDD8D0;
+}
+
+.services-section-2 .services-item-text {
+  color: #DDD8D0;
 }
 
 /* About Page Styles */

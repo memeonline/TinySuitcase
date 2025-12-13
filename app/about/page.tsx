@@ -249,7 +249,7 @@ export default function About() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <div id="hot-0bf6g" style={{ marginBottom: '-0.1rem' }} ref={splitFlapContainerRefEmpty}>
+            <div id="hot-0bf6g" style={{ marginBottom: '0.1rem' }} ref={splitFlapContainerRefEmpty}>
               <hotfx-split-flap height="1" width="23" duration="10">
                 
               </hotfx-split-flap>
