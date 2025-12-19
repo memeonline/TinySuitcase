@@ -27,6 +27,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Beth Ellen';
+  src: url('/fonts/BethEllen-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
   height: 100%;
   overflow: hidden;
@@ -1477,7 +1485,6 @@ main {
   padding: 4rem 2rem;
 }
 
-.about-section-2,
 .about-section-3,
 .about-section-4 {
   background-color: var(--cream-bg);
@@ -1489,10 +1496,312 @@ main {
   padding: 4rem 2rem;
 }
 
+.about-section-2 {
+  background-color: var(--cream-bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  height: auto;
+  padding: 4rem 2rem;
+}
+
 .about-section-container {
   width: 100%;
   margin: 0;
   padding: 1rem 0 1rem 0;
+}
+
+/* Section 2 Specific Styles */
+.about-section-2-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.about-section-2-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.about-section-2-image-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.about-section-2-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-image-wrapper {
+    justify-content: center;
+  }
+  
+  .about-section-2-image {
+    max-width: 100%;
+  }
+}
+
+.about-section-2-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about-section-2-title {
+  font-family: 'Beth Ellen';
+  font-size: 24px;
+  font-weight: 500;
+  color: rgba(28, 9, 2, 1);
+  margin: 0 0 1.5rem 0;
+  text-align: left;
+  line-height: 1.2;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.about-section-2-bio {
+  font-family: 'Big Caslon', 'Big Caslon Regular', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #1C0902;
+  margin: 0;
+  text-align: left;
+  max-width: 750px;
+  margin-left: -50px;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-bio {
+    font-size: 16px;
+    text-align: left;
+  }
+}
+
+.about-section-2-bottom-images {
+  width: 100%;
+  margin-top: -4rem;
+}
+
+.about-section-2-bottom-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-bottom-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+.about-section-2-personality-text {
+  min-width: 200px;
+}
+
+.about-section-2-personality-title {
+  font-family: 'Big Caslon', 'Big Caslon Regular', serif;
+  font-size: 20px;
+  font-weight: normal;
+  color: rgba(28, 9, 2, 1);
+  margin: 0;
+  text-align: left;
+  line-height: 1.2;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-personality-title {
+    font-size: 18px;
+    margin-bottom: 1rem;
+  }
+}
+
+.about-section-2-image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-image-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-section-2-image-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.about-section-2-image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.about-section-2-image-item .about-section-2-bottom-image {
+  margin-top: 1rem;
+}
+
+.about-section-2-image-item-right {
+  align-items: flex-start;
+  margin-top: -2rem;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.about-section-2-image-item-right .about-section-2-bottom-image {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+.about-section-2-image-item-bottom {
+  margin-top: 2rem;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.about-section-2-image-item-bottom .about-section-2-bottom-image {
+  margin-top: 0;
+  margin-left: -120px;
+  z-index: 1;
+}
+
+.about-section-2-image-caption-left {
+  position: relative;
+  z-index: 2;
+  width: 258px !important;
+  min-width: 258px;
+  margin-left: -150px;
+  margin-top: 8rem;
+}
+
+.about-section-2-image-caption-right {
+  font-family: 'Big Caslon', 'Big Caslon Regular', serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(28, 9, 2, 1);
+  margin: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  min-width: 200px;
+  max-width: 250px;
+}
+
+.about-section-2-image-caption-right .about-section-2-image-caption-text {
+  font-family: 'Beth Ellen';
+  display: block;
+  margin-top: 0.25rem;
+  text-align: left;
+}
+
+
+@media (max-width: 991px) {
+  .about-section-2-image-caption-top-right {
+    font-size: 13px;
+    width: 150px;
+  }
+  
+  .about-section-2-image-item-right {
+    margin-top: 0;
+  }
+}
+
+.about-section-2-image-caption-top {
+  font-family: 'Big Caslon', 'Big Caslon Regular', serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(28, 9, 2, 1);
+  margin: 0 0 0 0;
+  text-align: left;
+  display: block;
+}
+
+.about-section-2-image-caption-top .about-section-2-image-caption-text {
+  font-family: 'Beth Ellen';
+  display: block;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-image-caption-top {
+    font-size: 13px;
+  }
+}
+
+.about-section-2-image-caption {
+  font-family: 'Big Caslon', 'Big Caslon Regular', serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(28, 9, 2, 1);
+  margin: 0.75rem 0 0 0;
+  margin-left: -20px;
+  text-align: left;
+  display: block;
+  width: 258px;
+}
+
+.about-section-2-image-caption.about-section-2-image-caption-left {
+  width: 258px !important;
+  min-width: 258px;
+  margin-left: -150px;
+  margin-top: 8rem;
+}
+
+.about-section-2-image-caption-bold {
+  font-family: 'Beth Ellen';
+  display: block;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 991px) {
+  .about-section-2-image-caption {
+    font-size: 13px;
+  }
+}
+
+.about-section-2-bottom-image {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  display: flex !important;
+  flex-wrap: wrap !important;
 }
 .about-section-container-flip {
   width: fit-content;

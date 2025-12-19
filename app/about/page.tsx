@@ -2,6 +2,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import Script from 'next/script'
@@ -203,20 +204,111 @@ export default function About() {
         </div>
       </section>
 
-      {/* Section 2 - Placeholder */}
+      {/* Section 2 - Megan Dreisbach */}
       <section className="scroll-snap-section about-section-2">
-        <div className="about-section-container">
+        <div className="about-section-2-container">
           <motion.div
-            className="about-content"
+            className="about-section-2-content"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="about-section-title">Section 2</h2>
-            <p className="about-section-text">
-              Content coming soon...
-            </p>
+            {/* Image on the left */}
+            <div className="about-section-2-image-wrapper">
+              <Image
+                src="/images/about/megan.png"
+                alt="Megan Dreisbach"
+                width={400}
+                height={480}
+                className="about-section-2-image"
+                unoptimized
+              />
+            </div>
+
+            {/* Text on the right */}
+            <div className="about-section-2-text-wrapper">
+              <h2 className="about-section-2-title">Megan Dreisbach</h2>
+              <p className="about-section-2-bio">
+                Megan Dreisbach is a creative director, art director, and designer whose work blends strategic clarity with visual storytelling. Split between New York and Mexico City, she approaches each project with design-minded curiosity, exploring culture and place to shape narratives that resonate.
+                <br />
+                <br />
+                With experience spanning global beauty/lifestyle brands and boutique travel experiences, she believes powerful visuals come from meticulous detail. They build connection. They shape memory. And they reveal beauty in places we don&apos;t always think to look—like a ginger finding her fairytale in CDMX.
+              </p>
+            </div>
+          </motion.div>
+          
+          {/* Bottom images section */}
+          <motion.div
+            className="about-section-2-bottom-images"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="about-section-2-bottom-content">
+              <div className="about-section-2-personality-text">
+                <h3 className="about-section-2-personality-title">Personality Snapshot...</h3>
+              </div>
+              <div className="about-section-2-image-grid">
+                <div className="about-section-2-image-item">
+                  <Image
+                    src="/images/about/jacarandas.png"
+                    alt="Jacarandas"
+                    width={150}
+                    height={195}
+                    className="about-section-2-bottom-image"
+                    unoptimized
+                  />
+                  <p className="about-section-2-image-caption">
+                    The best time of the year:
+                    <span className="about-section-2-image-caption-bold">Jacaranda season in Mexico City</span>
+                  </p>
+                </div>
+                <div className="about-section-2-image-item">
+                  <p className="about-section-2-image-caption-top">
+                    A recent rediscovery as an adult:
+                    <span className="about-section-2-image-caption-text">Mangos, because location changes everything</span>
+                  </p>
+                  <Image
+                    src="/images/about/mango.png"
+                    alt="Mango"
+                    width={100}
+                    height={130}
+                    className="about-section-2-bottom-image"
+                    unoptimized
+                  />
+                </div>
+                <div className="about-section-2-image-item about-section-2-image-item-right">
+                  <Image
+                    src="/images/about/quetzal.png"
+                    alt="Quetzal"
+                    width={150}
+                    height={195}
+                    className="about-section-2-bottom-image"
+                    unoptimized
+                  />
+                  <p className="about-section-2-image-caption-right">
+                    I&apos;m a BIG FAN of:
+                    <span className="about-section-2-image-caption-text">Fluid shapes and high-contrast palettes</span>
+                  </p>
+                </div>
+                <div className="about-section-2-image-item about-section-2-image-item-bottom">
+                  <p className="about-section-2-image-caption about-section-2-image-caption-left">
+                    First stop in a new city:
+                    <span className="about-section-2-image-caption-bold">I start in the galleries.</span>
+                  </p>
+                  <Image
+                    src="/images/about/galeries.png"
+                    alt="Galleries"
+                    width={150}
+                    height={195}
+                    className="about-section-2-bottom-image"
+                    unoptimized
+                  />
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -268,7 +360,7 @@ export default function About() {
               <hotfx-split-flap height="2" width="23" duration="100" >
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MEXICO CITY
               </hotfx-split-flap>
-            </div>
+            </div>Update the desi
 
           </motion.div>
         </div>
