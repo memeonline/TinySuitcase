@@ -174,7 +174,7 @@ export default function Services() {
             {/* Left Side - Text */}
             <div className="services-page-left">
               <h1 className="services-page-title">BRAND SERVICES</h1>
-              <div className="services-content">
+              <div className="services-content" style={{ width: '90% !important' }}>
                 <div className="services-item">
                   <h2 className="services-item-title">FORA TRAVEL LOGISTICS</h2>
                   <p className="services-item-text">

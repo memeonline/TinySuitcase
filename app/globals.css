@@ -1361,7 +1361,7 @@ main {
   flex-direction: column;
   gap: 1.5rem;
   align-items: flex-start;
-  width: 100%;
+  width: 90% !important;
   margin-top: 2rem;
 }
 
@@ -1434,18 +1434,12 @@ main {
     text-align: left;
   }
   
-  .services-content {
-    align-items: flex-start;
-  }
-  
+
   .services-item {
     align-items: flex-start;
     text-align: left;
   }
 
-  .services-content {
-    gap: 1.5rem;
-  }
 }
 
 /* Brown menu on services section 2 */
