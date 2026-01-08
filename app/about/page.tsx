@@ -215,7 +215,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
           >
             {/* Image on the left */}
-            <div className="about-section-2-image-wrapper">
+            <div className="about-section-2-image-wrapper" style={{ maxWidth: '400px', marginTop: '-1rem' }}>
               <Image
                 src="/images/about/megan.png"
                 alt="Megan Dreisbach"
@@ -223,15 +223,15 @@ export default function About() {
                 height={480}
                 className="about-section-2-image"
                 unoptimized
+                
               />
             </div>
 
             {/* Text on the right */}
-            <div className="about-section-2-text-wrapper">
+            <div className="about-section-2-text-wrapper" style={{ marginTop: '1rem' }}>
               <h2 className="about-section-2-title">Megan Dreisbach</h2>
               <p className="about-section-2-bio">
                 Megan Dreisbach is a creative director, art director, and designer whose work blends strategic clarity with visual storytelling. Split between New York and Mexico City, she approaches each project with design-minded curiosity, exploring culture and place to shape narratives that resonate.
-                <br />
                 <br />
                 With experience spanning global beauty/lifestyle brands and boutique travel experiences, she believes powerful visuals come from meticulous detail. They build connection. They shape memory. And they reveal beauty in places we don&apos;t always think to look—like a ginger finding her fairytale in CDMX.
               </p>
@@ -313,20 +313,96 @@ export default function About() {
         </div>
       </section>
 
-      {/* Section 3 - Placeholder */}
+      {/* Section 3 - Danielle Robles */}
       <section className="scroll-snap-section about-section-3">
-        <div className="about-section-container">
+        <div className="about-section-2-container">
           <motion.div
-            className="about-content"
+            className="about-section-2-content"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="about-section-title">Section 3</h2>
-            <p className="about-section-text">
-              Content coming soon...
-            </p>
+            {/* Image on the left */}
+            <div className="about-section-2-image-wrapper" style={{ maxWidth: '550px' }}>
+              <Image
+                src="/images/about/Danielle.png"
+                alt="Danielle Robles"
+                width={600}
+                height={680}
+                className="about-section-2-image"
+                unoptimized
+              />
+            </div>
+
+            {/* Text on the right */}
+            <div className="about-section-2-text-wrapper" style={{ marginTop: '-.5rem' }}>
+              <h2 className="about-section-2-title">Danielle Robles</h2>
+              <p className="about-section-2-bio">
+                Danielle Robles is an LA-native creative director, copywriter, and content strategist with over 13 years of experience shaping narratives for some of the world's most recognizable brands. Coming from a multicultural background, she approaches every story with curiosity––about culture, identity, and the ways creativity shapes how we see the world.
+                <br />
+                <br />
+                From developing glossy eBay campaigns to capturing boots-on-the-ground content for New York Fashion Week, she believes that the stories worth telling are the ones that bleed authenticity. They linger in our minds long after we scroll away. They remind us we're human.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Bottom images section */}
+          <motion.div
+            className="about-section-2-bottom-images"
+            style={{ marginTop: '-10rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="about-section-2-bottom-content">
+              <div className="about-section-2-personality-text">
+                <h3 className="about-section-2-personality-title" style={{ marginTop: '7rem' }}>A few of my favorite things...</h3>
+              </div>
+            </div>
+            <div className="about-section-2-image-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '900px', margin: '0 auto', marginLeft: '25rem' }}>
+              <div className="about-section-2-image-item" style={{ position: 'relative' }}>
+              <p className="about-section-2-image-caption about-section-2-image-caption-left" style={{ marginTop: '-7rem', marginBottom: '-3rem', position: 'relative', zIndex: 1 }}>
+                Favorite thing about L.A.:<span className="about-section-2-image-caption-bold" >Eating a breakfast burrito on <br />the beach in mid-November</span>
+                </p>
+                <Image
+                  src="/images/about/burrito.png"
+                  alt="Burrito"
+                  width={150}
+                  height={195}
+                  className="about-section-2-bottom-image"
+                  style={{ marginTop: '-1rem' }}
+                  unoptimized
+                />
+              </div>
+              <div className="about-section-2-image-item" style={{ marginTop: '-12rem' }}>
+                <Image
+                  src="/images/about/city.png"
+                  alt="City"
+                  width={150}
+                  height={195}
+                  className="about-section-2-bottom-image"
+                  unoptimized
+                />
+                <p className="about-section-2-image-caption" style={{ marginLeft: '-3rem', marginTop: '-.2rem' }}>
+                  Favorite cities: <span className="about-section-2-image-caption-bold">CDMX, Lisbon & <br /> Copenhagen</span>
+                </p>
+              </div>
+              <div className="about-section-2-image-item" style={{ marginTop: '-9rem', position: 'relative' }}>
+                <p className="about-section-2-image-caption about-section-2-image-caption-left" style={{ marginTop: '-2rem', marginBottom: '-3rem', marginLeft: '2rem', position: 'relative', zIndex: 1 }}>
+                  Favourite quote:
+                </p>
+                <Image
+                  src="/images/about/postit.png"
+                  alt="Postit"
+                  width={225}
+                  height={293}
+                  className="about-section-2-bottom-image about-section-2-bottom-image-large"
+                  unoptimized
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>

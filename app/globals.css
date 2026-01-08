@@ -1354,6 +1354,8 @@ main {
   max-width: 400px;
   height: auto;
   object-fit: contain;
+  clip-path: inset(5% 0 0 0);
+  object-position: center top;
 }
 
 .services-content {
@@ -1479,7 +1481,16 @@ main {
   padding: 4rem 2rem;
 }
 
-.about-section-3,
+.about-section-3 {
+  background-color: var(--cream-bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  height: auto;
+  padding: 4rem 2rem;
+}
+
 .about-section-4 {
   background-color: var(--cream-bg);
   display: flex;
@@ -1497,7 +1508,7 @@ main {
   justify-content: center;
   min-height: 100vh;
   height: auto;
-  padding: 4rem 2rem;
+  padding-top: 4rem;
 }
 
 .about-section-container {
@@ -1533,13 +1544,16 @@ main {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-top: -6rem;
+  margin-left: -2rem;
 }
 
 .about-section-2-image {
-  width: 100%;
-  max-width: 400px;
+  width: 110%;
+  max-width: 1000px;
   height: auto;
   object-fit: contain;
+  margin-left: -4rem;
 }
 
 @media (max-width: 991px) {
@@ -1556,6 +1570,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-top: 3rem;
 }
 
 .about-section-2-title {
@@ -1568,6 +1583,7 @@ main {
   line-height: 1.2;
   background-clip: unset;
   -webkit-background-clip: unset;
+  margin-left: -50px;
 }
 
 @media (max-width: 991px) {
@@ -1675,12 +1691,13 @@ main {
 }
 
 .about-section-2-image-item-right .about-section-2-bottom-image {
-  margin-top: 0;
+  margin-top: 2rem;
   flex-shrink: 0;
 }
 
 .about-section-2-image-item-bottom {
   margin-top: 2rem;
+  margin-left: 3rem;
   flex-direction: row;
   align-items: center;
   position: relative;
@@ -1714,12 +1731,15 @@ main {
   flex: 1;
   min-width: 200px;
   max-width: 250px;
+  margin-top: 1rem;
+  margin-left: -1rem;
+
 }
 
 .about-section-2-image-caption-right .about-section-2-image-caption-text {
   font-family: 'Beth Ellen';
   display: block;
-  margin-top: 0.25rem;
+  margin-top: .5rem;
   text-align: left;
 }
 
@@ -1797,6 +1817,29 @@ main {
   display: flex !important;
   flex-wrap: wrap !important;
 }
+
+.about-section-2-bottom-image-large {
+  max-width: 275px !important;
+  width: 275px !important;
+}
+
+.about-section-2-image-caption-overlay {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  z-index: 10;
+  font-family: 'Big Caslon', 'Big Caslon Regular', serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(28, 9, 2, 1);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  margin: 0;
+  max-width: 140px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .about-section-container-flip {
   width: fit-content;
   max-width: 100%;

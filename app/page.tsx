@@ -861,52 +861,6 @@ export default function ComingSoon() {
         </div>
       </section>
 
-      {/* Section 5 */}
-      <section className="scroll-snap-section section-5-split">
-        <div className="section-5-container">
-          {/* Left side - Background image 65% */}
-          <motion.div
-            className="section-5-left"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="section-5-image-wrapper">
-              <Image
-                src="/images/section4/BackgroundSec4.png"
-                alt=""
-                fill
-                className="section-5-image"
-                sizes="(min-width: 1024px) 65vw, 100vw"
-                priority={false}
-              />
-            </div>
-          </motion.div>
-
-          {/* Middle - Title */}
-          <motion.div
-            className="section-5-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            <h2 className="section-5-title">ready to get started?</h2>
-          </motion.div>
-
-          {/* Right - Call to action */}
-          <motion.div
-            className="section-5-right"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <span className="section-5-cta">WORK WITH US</span>
-          </motion.div>
-        </div>
-      </section>
       {showCalendlyOverlay && (
         <div className="calendly-overlay" onClick={() => setShowCalendlyOverlay(false)}>
           <div className="calendly-modal" onClick={(e) => e.stopPropagation()}>
