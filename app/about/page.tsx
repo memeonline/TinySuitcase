@@ -342,7 +342,7 @@ export default function About() {
                 Danielle Robles is an LA-native creative director, copywriter, and content strategist with over 13 years of experience shaping narratives for some of the world&apos;s most recognizable brands. Coming from a multicultural background, she approaches every story with curiosity––about culture, identity, and the ways creativity shapes how we see the world.
                 <br />
                 <br />
-                From developing glossy eBay campaigns to capturing boots-on-the-ground content for New York Fashion Week, she believes that the stories worth telling are the ones that bleed authenticity. They linger in our minds long after we scroll away. They remind us we're human.
+                From developing glossy eBay campaigns to capturing boots-on-the-ground content for New York Fashion Week, she believes that the stories worth telling are the ones that bleed authenticity. They linger in our minds long after we scroll away. They remind us we&apos;re human.
               </p>
             </div>
           </motion.div>
