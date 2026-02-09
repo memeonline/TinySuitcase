@@ -1,5 +1,11 @@
 import type { Metadata } from 'next'
+import { Source_Sans_3 } from 'next/font/google'
 import './globals.css'
+
+const sourceSans = Source_Sans_3({
+  subsets: ['latin'],
+  variable: '--font-source-sans',
+})
 
 export const metadata: Metadata = {
   title: 'Tiny Suitcase Travel Agency - Coming Soon',
@@ -24,20 +30,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={sourceSans.variable}>
       <head>
         <link
           rel="preload"
           href="/fonts/TG-GirthyUltra.otf"
           as="font"
           type="font/otf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/RedditMono-Regular.ttf"
-          as="font"
-          type="font/ttf"
           crossOrigin="anonymous"
         />
       </head>

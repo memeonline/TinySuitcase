@@ -1,11 +1,11 @@
-// Work Page - /work route
+// Contact Page - /contact route
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useState } from 'react'
 
-export default function Work() {
+export default function Contact() {
   const menuItems = [
     { label: 'About', href: '/about' },
     { label: 'Services', href: '/services' },
@@ -128,7 +128,7 @@ export default function Work() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="page-title">Work</h1>
+              <h1 className="page-title">Contact</h1>
               <p className="body-text">Coming soon...</p>
             </motion.div>
           </div>
