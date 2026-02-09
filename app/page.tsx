@@ -72,7 +72,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Link href={item.href} className="menu-link">
+                  <Link href={item.href} className="menu-link menu-link-centered">
                     {item.label}
                     <motion.span
                       className="menu-underline"
@@ -83,6 +83,24 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
+
+            <motion.div
+              className="contact-link-in-menu"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="/contact" className="menu-link menu-link-centered">
+                Contact
+                <motion.span
+                  className="menu-underline"
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.3 }}
+                />
+              </Link>
+            </motion.div>
 
             <button
               className="hamburger-menu-button"
@@ -122,7 +140,7 @@ export default function Home() {
                   ×
                 </button>
                 <div className="mobile-menu-items">
-                  {menuItems.map((item, index) => (
+                  {[...menuItems, { label: 'Contact', href: '/contact' }].map((item, index) => (
                     <motion.div
                       key={item.label}
                       initial={{ opacity: 0, x: 20 }}
